@@ -6,7 +6,7 @@ const fetchTrending = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const request = await axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=${process.env.API_KEY}&limit=35`)
-      resolve(request.data)
+      resolve(request.data.data)
     } catch (err) {
       reject(err)
     }
