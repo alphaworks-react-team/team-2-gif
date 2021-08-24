@@ -18,17 +18,16 @@ const App = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
+
+
+  const onSearchSubmit = (searchTerm) => {
+    setSearchTerm(searchTerm)
     axios.get(`/search/${searchTerm}`)
         .then((res) => {
             console.log(res)
             setSearchedGifs(res.data);
         })
         .catch((err) => console.log(err));
-  }, [searchTerm]);
-
-  const onSearchSubmit = (searchTerm) => {
-    setSearchTerm(searchTerm)
 } 
 
 
