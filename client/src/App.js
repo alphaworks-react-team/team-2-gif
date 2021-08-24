@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "./Components/Search";
+import Search from "./Components/HomeSearch/Search";
 
 const App = () => {
   const [trending, setTrending] = useState([]);
