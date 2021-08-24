@@ -1,31 +1,40 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { useEffect } from "react";
-import axios from "axios";
 
-function App() {
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Search from "./Components/Search";
+
+const App = () => {
+  const [trending, setTrending] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchedGifs, setSearchedGifs] = useState([])
+
   useEffect(() => {
     axios
       .get("/api")
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res)
+        setTrending(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
+
+
+
+  const onSearchSubmit = (searchTerm) => {
+    setSearchTerm(searchTerm)
+    axios.get(`/search/${searchTerm}`)
+        .then((res) => {
+            console.log(res)
+            setSearchedGifs(res.data);
+        })
+        .catch((err) => console.log(err));
+} 
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search onSearchSubmit={onSearchSubmit} />
+
     </div>
   );
 }
