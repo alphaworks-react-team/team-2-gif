@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
-
+//height:100%;
+//width:10vh
 const Search = (props) => {
     const [searchTerm, setSearchTerm] = useState("")
     // const [searchData, setSearchData] = useState([])
