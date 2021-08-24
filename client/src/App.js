@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Search from "./Components/HomeSearch/Search";
 import HomeCategories from './Components/HomeCategories/HomeCategories'
+import Main from './Components/Main'
 
 const App = () => {
   const [trending, setTrending] = useState([]);
@@ -39,8 +40,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <Search onSearchSubmit={onSearchSubmit} />
-      <HomeCategories categories={categories} />
+      <Main>
+        <Search onSearchSubmit={onSearchSubmit} />
+        <HomeCategories categories={categories} />
+      </Main>
 
     </div>
   );
