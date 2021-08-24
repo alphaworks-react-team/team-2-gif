@@ -4,6 +4,7 @@ import axios from 'axios';
 import Search from './Components/HomeSearch/Search';
 import Main from './Components/Main'
 import TrendingPage from './Components/TrendingPage/TrendingPage'
+import HomeTrending from './Components/HomeTrending/HomeTrending';
 
 const App = () => {
 	const [trending, setTrending] = useState([]);
@@ -34,7 +35,8 @@ const App = () => {
 	return (
 		<div className='App'>
 			<Main>
-				<Search onSearchSubmit={onSearchSubmit} />
+        <Search onSearchSubmit={onSearchSubmit} />
+        <HomeTrending trending={trending}/>
 			</Main>
 		</div>
 	);
