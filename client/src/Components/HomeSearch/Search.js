@@ -20,7 +20,9 @@ const Search = (props) => {
 			backgroundColor: "lightgray",
 			border: "none",
 			borderRadius: "5px",
-			outline: "none",
+            outline: "none",
+            width: "50%",
+            alignSelf:"center"
 		},
 	};
 
