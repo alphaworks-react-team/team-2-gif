@@ -53,7 +53,6 @@ const fetchCategories = () => {
 
 router.get("/api", async (req, res) => {
   try {
-    console.log(process.env.GIF_KEY)
     res.json(await fetchTrending())
   } catch (err) {
     res.json(err)
@@ -62,7 +61,6 @@ router.get("/api", async (req, res) => {
 
 router.get("/search/:searchTerm", async (req, res) => {
   try {
-    console.log(process.env.GIF_KEY)
     res.json(await fetchSearch(req.params.searchTerm))
   } catch (err) {
     res.json(err)
