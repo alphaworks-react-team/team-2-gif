@@ -2,13 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
+position: relative;
 	display: flex;
 	flex-direction: column;
-	/* justify-content: space-around; */
-	/* align-items: center; */
-	height: 100%;
-	width: 80vw;
-	/* box-sizing: border-box; */
+	min-height: 100%;
+	min-width: 80vw;
 	background-color: black;
 `;
 

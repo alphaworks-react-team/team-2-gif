@@ -3,8 +3,10 @@ import axios from "axios";
 import Search from "./Components/HomeSearch/Search";
 import HomeCategories from "./Components/HomeCategories/HomeCategories";
 import Main from "./Components/Main";
-import SearchPage from "./Components/SearchPage/SearchPage";
 import "./App.css";
+import HomeTrending from "./Components/HomeTrending/HomeTrending";
+import TrendingPage from "./Components/TrendingPage/TrendingPage";
+import SearchPage from "./Components/SearchPage/SearchPage";
 
 const App = () => {
   const [trending, setTrending] = useState([]);
@@ -41,6 +43,8 @@ const App = () => {
     <div className="App">
       <Main>
         <Search onSearchSubmit={onSearchSubmit} />
+        {/* <HomeTrending trending={trending} /> */}
+        {/* <TrendingPage trending={trending} /> */}
         {searchedGifs ? (
           <SearchPage searchedGifs={searchedGifs} />
         ) : (
