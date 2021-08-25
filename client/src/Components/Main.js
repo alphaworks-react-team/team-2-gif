@@ -6,7 +6,7 @@ const MainContainer = styled.div`
 	flex-direction: column;
 	/* justify-content: space-around; */
 	/* align-items: center; */
-	height: 100%;
+	min-height: 100%;
 	width: 80vw;
 	/* box-sizing: border-box; */
 	background-color: black;

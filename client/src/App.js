@@ -47,7 +47,6 @@ const App = () => {
         <HomeTrending trending={trending}/>
         <HomeCategories categories={categories} />
       </Main>
-
     </div>
   );
 }
