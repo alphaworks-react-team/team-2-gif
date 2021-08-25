@@ -1,9 +1,25 @@
 import React from "react";
-import Search from "./../HomeSearch/Search";
+import styled from "styled-components";
 
 //height:80vh
 //width:100%
-const SearchPage = () => {
+
+const StyledSearch = styled.div`
+  position: relative;
+  width: 100%;
+  height: auto;
+`;
+const StyledGrid = styled.div`
+  line-height: 2;
+  -webkit-column-count: 4;
+  -webkit-column-gap: 10px;
+  -moz-column-count: 4;
+  -moz-column-gap: 10px;
+  column-count: 4;
+  column-gap: 10px;
+`;
+
+const SearchPage = ({ searchedGifs }) => {
   return (
     <div>
       {/* <form onSubmit={onSubmit}>
@@ -19,6 +35,18 @@ const SearchPage = () => {
           Search
         </Button>
       </form> */}
+
+      <StyledGrid>
+        {searchedGifs.map((searchRes, index) => (
+          <StyledSearch key={index}>
+            <img
+              src={searchRes.images.fixed_width.url}
+              style={{ width: "100%" }}
+              alt=""
+            />
+          </StyledSearch>
+        ))}
+      </StyledGrid>
     </div>
   );
 };
