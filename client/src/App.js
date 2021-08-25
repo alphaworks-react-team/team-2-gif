@@ -4,6 +4,8 @@ import axios from "axios";
 import Search from "./Components/HomeSearch/Search";
 import HomeCategories from './Components/HomeCategories/HomeCategories'
 import Main from './Components/Main'
+import "./App.css"
+import HomeTrending from "./Components/HomeTrending/HomeTrending";
 
 const App = () => {
   const [trending, setTrending] = useState([]);
@@ -42,6 +44,7 @@ const App = () => {
     <div className="App">
       <Main>
         <Search onSearchSubmit={onSearchSubmit} />
+        <HomeTrending trending={trending}/>
         <HomeCategories categories={categories} />
       </Main>
 
