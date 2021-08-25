@@ -1,19 +1,36 @@
-import React from 'react'
-import styled from 'styled-components'
-import Main from '../Main'
-const TrendingStyles = styled.div`
-	height: ${props => props.height};
-	width: ${props => props.width};
-	border: ${props => props.border};
-`;
-const TrendingPage = (props) => {
-    return (
-			
-				<TrendingStyles height='100vh' width='80%'>
-					
-				</TrendingStyles>
-			
-		);
-}
+import React from 'react';
+import styled from 'styled-components';
 
-export default TrendingPage
+const TrendingStyles = styled.div`
+	/* position: absolute; */
+	width: 100%;
+	height: auto;
+`;
+const StyledGrid = styled.div`
+	line-height: 2;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 10px;
+	-moz-column-count: 4;
+	-moz-column-gap: 10px;
+	column-count: 4;
+	column-gap: 2px;
+`;
+const Title = styled.h3`
+	font-weight: 300;
+`;
+const TrendingPage = ({ trending }) => {
+	return (
+		<div>
+			<Title>Trending</Title>
+			<StyledGrid>
+				{trending.map((trending, index) => (
+					<TrendingStyles key={index}>
+						<img src={trending.images.fixed_width.url} alt='' />
+					</TrendingStyles>
+				))}
+			</StyledGrid>
+		</div>
+	);
+};
+
+export default TrendingPage;
