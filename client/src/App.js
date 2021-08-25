@@ -44,7 +44,7 @@ const App = () => {
     <div className="App">
       <Main>
         <Search onSearchSubmit={onSearchSubmit} />
-        {/* <HomeTrending trending={trending} /> */}
+        <HomeTrending trending={trending} />
         {/* <TrendingPage trending={trending} /> */}
         {searchedGifs.length > 1 ? (
           <div>

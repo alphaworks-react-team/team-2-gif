@@ -5,8 +5,8 @@ const MainContainer = styled.div`
 position: relative;
 	display: flex;
 	flex-direction: column;
-	min-height: 100%;
-	min-width: 80vw;
+	height: 100%;
+	width: 80vw;
 	background-color: black;
 `;
 
