@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TrendingStyles = styled.div`
-	/* position: absolute; */
+	position: relative;
 	width: 100%;
 	height: auto;
 `;
 const StyledGrid = styled.div`
+	
+
 	line-height: 2;
 	-webkit-column-count: 4;
 	-webkit-column-gap: 10px;

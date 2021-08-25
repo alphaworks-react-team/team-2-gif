@@ -7,6 +7,10 @@ import "./App.css";
 import HomeTrending from "./Components/HomeTrending/HomeTrending";
 import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
+import styled from 'styled-components';
+
+
+
 
 const App = () => {
   const [trending, setTrending] = useState([]);
@@ -43,13 +47,13 @@ const App = () => {
     <div className="App">
       <Main>
         <Search onSearchSubmit={onSearchSubmit} />
-        <HomeTrending trending={trending} />
-        {/* <TrendingPage trending={trending} /> */}
-        {searchedGifs ? (
+        {/* <HomeTrending trending={trending} /> */}
+        <TrendingPage trending={trending} />
+        {/* {searchedGifs ? (
           <SearchPage searchedGifs={searchedGifs} />
         ) : (
           <HomeCategories categories={categories} />
-        )}
+        )} */}
       </Main>
     </div>
   );
