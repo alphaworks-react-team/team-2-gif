@@ -7,6 +7,7 @@ import "./App.css";
 import HomeTrending from "./Components/HomeTrending/HomeTrending";
 import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
+import CategorySearchPage from './Components/CategorySearchPage/CategorySearchPage'
 
 const App = () => {
   const [trending, setTrending] = useState([]);
@@ -45,10 +46,12 @@ const App = () => {
         <Search onSearchSubmit={onSearchSubmit} />
         {/* <HomeTrending trending={trending} /> */}
         {/* <TrendingPage trending={trending} /> */}
-        {searchedGifs ? (
-          <SearchPage searchedGifs={searchedGifs} />
+        {searchedGifs.length > 1 ? (
+          <div>
+            <SearchPage searchedGifs={searchedGifs} />
+          </div>
         ) : (
-          <HomeCategories categories={categories} />
+          <HomeCategories categories={categories} clickedSearch={onSearchSubmit}/>
         )}
       </Main>
     </div>

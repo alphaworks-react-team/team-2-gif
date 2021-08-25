@@ -16,19 +16,20 @@ const StyledGrid = styled.div`
     column-gap:           10px;
 `
 
-const HomeCategories = ({categories}) => {
+const HomeCategories = ({categories, clickedSearch}) => {
 
-
-    console.log(categories)
     return (
+        <div>
+            <h1 style={{color: "white", margin: 0}}>Categories</h1>
         <StyledGrid>
             {categories.map((category, index) => (
-                <StyledCategory key={index}>
+                <StyledCategory key={index} onClick={() => clickedSearch(category.name)} >
                     <h3 style={{position: 'absolute', color: 'white'}}>{category.name}</h3>
                     <img src={category.gif.images.fixed_width.url} style={{width: '100%'}} alt=""/>
                 </StyledCategory>
             ))}
         </StyledGrid>
+        </div>
     )
 }
 
