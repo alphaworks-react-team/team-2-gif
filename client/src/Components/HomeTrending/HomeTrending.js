@@ -1,25 +1,34 @@
-import React from 'react'
+import React from "react";
 //height:30vh
 //width:100%
-const HomeTrending = () => {
-    const styles = {
-        height: "30vh",
-        width: "100%",
-    }
-    return (
-			<div styles={styles}>
-				<p style={{ color: "white" }}>hello</p>
-
-				<img
-					src="https://media4.giphy.com/media/Cn4PbwWE6BlEavxJDD/200.gif?cid=1ab55bd9lbewejo4net42ky9txp132gxhfsmfk0op2vm1zkm&rid=200.gif&ct=g"
-					alt=""
-				/>
-				<img
-					src="https://media3.giphy.com/media/cdNSp4L5vCU7aQrYnV/200.gif?cid=1ab55bd9lbewejo4net42ky9txp132gxhfsmfk0op2vm1zkm&rid=200.gif&ct=g"
-					alt="fixed hight"
-				/>
+const HomeTrending = ({ trending }) => {
+	const styles = {
+		height: "30vh",
+		width: "100%",
+		gifs: {
+			display: "flex",
+			overflowX: "auto",
+			overflowY: "hidden",
+		},
+		img: {
+			marginRight: "10px",
+		},
+	};
+	return (
+		<div styles={styles}>
+			<h1 style={{ color: "white", margin: 0 }}>Trending</h1>
+			<div style={styles.gifs}>
+				{trending.map((gif, index) => (
+					<img
+						key={gif.index}
+						src={gif.images.fixed_height.url}
+						alt=""
+						style={styles.img}
+					/>
+				))}
 			</div>
-		);
-}
-
-export default HomeTrending
+		</div>
+	);
+};
+//
+export default HomeTrending;
