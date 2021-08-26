@@ -16,7 +16,8 @@ const App = () => {
   const [searchedGifs, setSearchedGifs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(0);
-  const [modal, setModal] = useState();
+  const [modalDisplay, setModalDisplay] = useState(false);
+  const [currentGif, setCurrentGif] = useState({});
 
   useEffect(() => {
     axios.get("/api").then((res) => {
@@ -74,7 +75,11 @@ const App = () => {
             <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
               {searchTerm}
             </h1>
-            <SearchPage searchedGifs={searchedGifs} />
+            <SearchPage
+              setModalDisplay={setModalDisplay}
+              setCurrentGif={setCurrentGif}
+              searchedGifs={searchedGifs}
+            />
             <Paginator
               page={page}
               incrementPage={incrementPage}
@@ -90,7 +95,10 @@ const App = () => {
             />
           </div>
         )}
-        <Modal onClick={() => console.log("hello world")}></Modal>
+        <Modal shown={modalDisplay} onClick={() => console.log("hello world")}>
+          <button onClick={() => setModalDisplay(false)}>Close</button>
+          <img src={currentGif.images?.original.url} alt="" srcset="" />
+        </Modal>
       </Main>
     </div>
   );
