@@ -15,11 +15,11 @@ const fetchTrending = () => {
   })
 }
 
-const fetchSearch = (searchTerm) => {
+const fetchSearch = (searchTerm, page) => {
   return new Promise(async (resolve, reject) => {
     try {
       const request = await axios.get(
-				`https://api.giphy.com/v1/gifs/search?&q=${searchTerm}&api_key=${process.env.GIF_KEY}&limit=35`
+				`https://api.giphy.com/v1/gifs/search?&q=${searchTerm}&api_key=${process.env.GIF_KEY}&offset=${page}`
 			);
       resolve(request.data.data)
     } catch (err) {
@@ -59,9 +59,9 @@ router.get("/api", async (req, res) => {
   }
 });
 
-router.get("/search/:searchTerm", async (req, res) => {
+router.get("/search/:searchTerm/:page", async (req, res) => {
   try {
-    res.json(await fetchSearch(req.params.searchTerm))
+    res.json(await fetchSearch(req.params.searchTerm, req.params.page))
   } catch (err) {
     res.json(err)
   }
