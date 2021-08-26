@@ -49,7 +49,7 @@ const HomeTrending = ({ trending }) => {
 					))}
 				</Scroll>
 				<Button
-					// disabled={!ref}
+					// disabled{!ref}
 					bgColor="black"
 					color="white"
 					size="xx-large"
