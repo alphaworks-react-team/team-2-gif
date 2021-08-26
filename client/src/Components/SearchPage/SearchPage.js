@@ -22,20 +22,9 @@ const StyledGrid = styled.div`
 const SearchPage = ({ searchedGifs }) => {
   return (
     <div>
-      {/* <form onSubmit={onSubmit}>
-        <input
-          style={styles.input}
-          value={searchTerm}
-          onChange={onChange}
-          type="text"
-          placeholder="search"
-          name="search"
-        />
-        <Button type="submit" bgColor="#007bff" size="small" color="white">
-          Search
-        </Button>
-      </form> */}
-
+      {searchedGifs.length > 0 ? (
+        <h1 style={{ color: "white" }}>Search result</h1>
+      ) : null}
       <StyledGrid>
         {searchedGifs.map((searchRes, index) => (
           <StyledSearch key={index}>

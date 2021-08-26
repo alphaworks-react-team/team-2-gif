@@ -7,6 +7,7 @@ import "./App.css";
 import HomeTrending from "./Components/HomeTrending/HomeTrending";
 import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
+import Modal from "./Components/Modal/Modal";
 
 const App = () => {
   const [trending, setTrending] = useState([]);
@@ -43,13 +44,15 @@ const App = () => {
     <div className="App">
       <Main>
         <Search onSearchSubmit={onSearchSubmit} />
-        <HomeTrending trending={trending} />
+        {searchedGifs.length > 0 ? null : <HomeTrending trending={trending} />}
+
         {/* <TrendingPage trending={trending} /> */}
         {searchedGifs ? (
           <SearchPage searchedGifs={searchedGifs} />
         ) : (
           <HomeCategories categories={categories} />
         )}
+        <Modal onClick={() => console.log("hello world")}></Modal>
       </Main>
     </div>
   );
