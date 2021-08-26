@@ -15,7 +15,7 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchedGifs, setSearchedGifs] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [page, setPage] = useState(0);
+  const [offset, setOffset] = useState(0);
   const [modal, setModal] = useState();
 
   useEffect(() => {
@@ -33,23 +33,23 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (page > 0) {
+    if (offset >= 0) {
       axios
-        .get(`/search/${searchTerm}/${page}`)
+        .get(`/search/${searchTerm}/${offset}`)
         .then((res) => {
           console.log(res);
           setSearchedGifs(res.data);
         })
         .catch((err) => console.log(err));
     }
-  }, [page]);
+  }, [offset]);
 
-  const incrementPage = () => {
-    setPage((page) => page + 50);
+  const incrementOffset = () => {
+    setOffset((offset) => offset + 50);
   };
 
-  const decrementPage = () => {
-    setPage((page) => page - 50);
+  const decrementOffset = () => {
+    setOffset((offset) => offset - 50);
   };
 
   const onSearchSubmit = (searchTerm) => {
@@ -76,9 +76,9 @@ const App = () => {
             </h1>
             <SearchPage searchedGifs={searchedGifs} />
             <Paginator
-              page={page}
-              incrementPage={incrementPage}
-              decrementPage={decrementPage}
+              offset={offset}
+              incrementOffset={incrementOffset}
+              decrementOffset={decrementOffset}
             />
           </div>
         ) : (

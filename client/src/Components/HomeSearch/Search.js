@@ -14,6 +14,7 @@ const Search = (props) => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		props.onSearchSubmit(searchTerm);
+		setSearchTerm("")
 	};
     const styles = {
         height: "10vh",
