@@ -14,6 +14,8 @@ const App = () => {
   const [searchedGifs, setSearchedGifs] = useState([]);
   const [categories, setCategories] = useState([]);
 
+
+
   useEffect(() => {
     axios.get("/api").then((res) => {
       console.log(res);
@@ -44,7 +46,7 @@ const App = () => {
       <Main>
         <Search onSearchSubmit={onSearchSubmit} />
         <HomeTrending trending={trending} />
-        {/* <TrendingPage trending={trending} /> */}
+        <TrendingPage trending={trending} />
         {searchedGifs ? (
           <SearchPage searchedGifs={searchedGifs} />
         ) : (
