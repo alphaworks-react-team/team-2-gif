@@ -22,9 +22,6 @@ const StyledGrid = styled.div`
 const SearchPage = ({ searchedGifs }) => {
   return (
     <div>
-      {searchedGifs.length > 0 ? (
-        <h1 style={{ color: "white" }}>Search result</h1>
-      ) : null}
       <StyledGrid>
         {searchedGifs.map((searchRes, index) => (
           <StyledSearch key={index}>
