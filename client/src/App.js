@@ -43,11 +43,11 @@ const App = () => {
 }, [page])
 
 const incrementPage = () => {
-  setPage(page => page + 2)
+  setPage(page => page + 50)
 }
 
   const decrementPage = () => {
-  setPage(page => page - 1)
+  setPage(page => page - 50)
 }
 
   const onSearchSubmit = (searchTerm) => {
