@@ -16,6 +16,8 @@ const App = () => {
   const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(0)
 
+
+
   useEffect(() => {
     axios.get("/api").then((res) => {
       console.log(res);
