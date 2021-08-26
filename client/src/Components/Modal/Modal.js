@@ -8,7 +8,7 @@ const Modal = (props) => {
     filter: "blur(0)",
 
     opacity: " 1",
-    visibility: "visible",
+    visibility: props.shown === true ? "visible" : "hidden",
     position: "fixed",
     top: "50%",
     left: "50%",
@@ -16,8 +16,7 @@ const Modal = (props) => {
   };
   return (
     <div style={styleModal} onClick={props.onClick}>
-      {" "}
-      <h1>hi???</h1>
+      {props.children}
     </div>
   );
 };
