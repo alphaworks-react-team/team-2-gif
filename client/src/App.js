@@ -7,6 +7,7 @@ import "./App.css";
 import HomeTrending from "./Components/HomeTrending/HomeTrending";
 import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
+import Modal from "./Components/Modal/Modal";
 import Paginator from "./Components/Paginator/Paginator";
 
 const App = () => {
@@ -14,7 +15,8 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchedGifs, setSearchedGifs] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(0);
+  const [modal, setModal] = useState();
 
   useEffect(() => {
     axios.get("/api").then((res) => {
@@ -33,22 +35,22 @@ const App = () => {
   useEffect(() => {
     if (page > 0) {
       axios
-      .get(`/search/${searchTerm}/${page}`)
-      .then((res) => {
+        .get(`/search/${searchTerm}/${page}`)
+        .then((res) => {
           console.log(res);
           setSearchedGifs(res.data);
-      })
-      .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
     }
-}, [page])
+  }, [page]);
 
-const incrementPage = () => {
-  setPage(page => page + 50)
-}
+  const incrementPage = () => {
+    setPage((page) => page + 50);
+  };
 
   const decrementPage = () => {
-  setPage(page => page - 50)
-}
+    setPage((page) => page - 50);
+  };
 
   const onSearchSubmit = (searchTerm) => {
     setSearchTerm(searchTerm);
@@ -65,19 +67,30 @@ const incrementPage = () => {
     <div className="App">
       <Main>
         <Search onSearchSubmit={onSearchSubmit} />
+
         {/* <TrendingPage trending={trending} /> */}
         {searchedGifs.length > 1 ? (
           <div>
-            <h1 style={{color:'white', margin: '0px 0px 20px 35px'}}>{searchTerm}</h1>
+            <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
+              {searchTerm}
+            </h1>
             <SearchPage searchedGifs={searchedGifs} />
-            <Paginator page={page} incrementPage={incrementPage} decrementPage={decrementPage} />
+            <Paginator
+              page={page}
+              incrementPage={incrementPage}
+              decrementPage={decrementPage}
+            />
           </div>
         ) : (
           <div>
             <HomeTrending trending={trending} />
-            <HomeCategories categories={categories} clickedSearch={onSearchSubmit}/>
+            <HomeCategories
+              categories={categories}
+              clickedSearch={onSearchSubmit}
+            />
           </div>
         )}
+        <Modal onClick={() => console.log("hello world")}></Modal>
       </Main>
     </div>
   );
