@@ -19,8 +19,8 @@ const StyledGrid = styled.div`
 const HomeCategories = ({categories, clickedSearch}) => {
 
     return (
-        <div>
-            <h1 style={{color: "white", margin: 0}}>Categories</h1>
+        <div style={{marginTop: '35px'}}>
+            <h1 style={{color: "white", margin: '10px'}}>Categories</h1>
         <StyledGrid>
             {categories.map((category, index) => (
                 <StyledCategory key={index} onClick={() => clickedSearch(category.name)} >
