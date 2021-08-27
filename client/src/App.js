@@ -9,6 +9,7 @@ import TrendingPage from './Components/TrendingPage/TrendingPage';
 import SearchPage from './Components/SearchPage/SearchPage';
 import Modal from './Components/Modal/Modal';
 import Paginator from './Components/Paginator/Paginator';
+import Favs from './Components/Favs/Favs';
 
 const App = () => {
 	const [trending, setTrending] = useState([]);
@@ -18,7 +19,18 @@ const App = () => {
 	const [page, setPage] = useState(0);
 	const [modalDisplay, setModalDisplay] = useState(false);
 	const [currentGif, setCurrentGif] = useState({});
+	const [favGif, setFavGif] = useState([]);
 
+	useEffect(() => {
+		const favs = localStorage.getItem("favs");
+		if (favs == null) {
+			setFavGif([]);
+			localStorage.setItem("favs", JSON.stringify([]));
+		} else {
+			setFavGif(JSON.parse(favs));
+		}
+	}, []);
+	
 	useEffect(() => {
 		axios.get('/api').then(res => {
 			console.log(res);
@@ -64,8 +76,16 @@ const App = () => {
 			.catch(err => console.log(err));
 	};
 
+	const addFavGif = (image) => {
+		// console.log(image);
+		const favsCopy = [...favGif];
+		favsCopy.push(image);
+		localStorage.setItem("favs", JSON.stringify(favsCopy));
+		setFavGif(favsCopy);
+	};
+
 	return (
-		<div className='App'>
+		<div className="App">
 			<Main>
 				<Search onSearchSubmit={onSearchSubmit} />
 
@@ -75,15 +95,18 @@ const App = () => {
 					trending={trending}
 				/> */}
 
+				{/* <Favs favGif={favGif} /> */}
+
 				{searchedGifs.length > 1 ? (
 					<div>
-						<h1 style={{ color: 'white', margin: '0px 0px 20px 35px' }}>
+						<h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
 							{searchTerm}
 						</h1>
 						<SearchPage
 							setModalDisplay={setModalDisplay}
 							setCurrentGif={setCurrentGif}
 							searchedGifs={searchedGifs}
+							addFavGif={(image) => addFavGif(image)}
 						/>
 						<Paginator
 							page={page}
@@ -101,7 +124,7 @@ const App = () => {
 					</div>
 				)}
 				<Modal shown={modalDisplay}>
-					<img src={currentGif.images?.original.url} alt='' srcSet='' />
+					<img src={currentGif.images?.original.url} alt="" srcSet="" />
 					<button onClick={() => setModalDisplay(false)}>Close</button>
 					<button>Copy Link</button>
 				</Modal>
