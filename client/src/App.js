@@ -71,14 +71,7 @@ const App = () => {
       <Main>
         <Search onSearchSubmit={onSearchSubmit} offset={offset} />
         <Switch>
-          <Route exact path="/">
-            <HomeTrending trending={trending} />
-            <HomeCategories
-              categories={categories}
-              clickedSearch={onSearchSubmit}
-            />
-          </Route>
-          <Route exact path="/search/:searchTerm/:offset"  >
+          <Route path="/search/:searchTerm/:offset" >
               <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
                 {searchTerm}
               </h1>
@@ -88,6 +81,13 @@ const App = () => {
                 incrementOffset={incrementOffset}
                 decrementOffset={decrementOffset}
               />
+          </Route>
+          <Route exact path="/">
+            <HomeTrending trending={trending} />
+            <HomeCategories
+              categories={categories}
+              clickedSearch={onSearchSubmit}
+            />
           </Route>
         </Switch>
         </Main>
