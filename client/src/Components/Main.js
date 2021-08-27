@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
-position: relative;
+	/* display: grid;
+	height: 100%;
+  width: 80vw;
+	color: black; */
+	
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	height: 100%;

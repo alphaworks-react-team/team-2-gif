@@ -19,7 +19,7 @@ const StyledGrid = styled.div`
   column-gap: 10px;
 `;
 
-const SearchPage = ({ searchedGifs }) => {
+const SearchPage = ({ searchedGifs, setModalDisplay, setCurrentGif }) => {
   return (
     <div>
       <StyledGrid>
@@ -29,6 +29,10 @@ const SearchPage = ({ searchedGifs }) => {
               src={searchRes.images.fixed_width.url}
               style={{ width: "100%" }}
               alt=""
+              onClick={() => {
+                setModalDisplay(true);
+                setCurrentGif(searchedGifs[index]);
+              }}
             />
           </StyledSearch>
         ))}

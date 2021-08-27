@@ -17,22 +17,23 @@ const App = () => {
   const [searchedGifs, setSearchedGifs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [modal, setModal] = useState();
   const [page, setPage] = useState(1)
+  const [modalDisplay, setModalDisplay] = useState(false);
+	const [currentGif, setCurrentGif] = useState({});
 
-  useEffect(() => {
-    axios.get("/api").then((res) => {
-      console.log(res);
-      setTrending(res.data);
-    });
-    axios
-      .get("/categories")
-      .then((res) => {
-        console.log(res);
-        setCategories(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+	useEffect(() => {
+		axios.get('/api').then(res => {
+			console.log(res);
+			setTrending(res.data);
+		});
+		axios
+			.get('/categories')
+			.then(res => {
+				console.log(res);
+				setCategories(res.data);
+			})
+			.catch(err => console.log(err));
+	}, []);
 
   // this use effect for pagination
   useEffect(() => {
@@ -97,16 +98,11 @@ const App = () => {
         </Switch>
         </Main>
       </Router>
-
-        {/* <TrendingPage trending={trending} />
-        {searchedGifs.length > 1 ? (
-          <div>
-          </div>
-        ) : (
-          <div>
-          </div>
-        )}
-        <Modal onClick={() => console.log("hello world")}></Modal> */}
+      <Modal shown={modalDisplay}>
+					<img src={currentGif.images?.original.url} alt='' srcSet='' />
+					<button onClick={() => setModalDisplay(false)}>Close</button>
+					<button>Copy Link</button>
+				</Modal>
     </div>
   );
 };
