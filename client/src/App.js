@@ -18,6 +18,7 @@ const App = () => {
   const [categories, setCategories] = useState([]);
   const [offset, setOffset] = useState(0);
   const [modal, setModal] = useState();
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     axios.get("/api").then((res) => {
@@ -56,8 +57,10 @@ const App = () => {
 
   const onSearchSubmit = (searchTerm) => {
     setSearchTerm(searchTerm);
+    setOffset(0)
+    setPage(1)
     axios
-      .get(`/search/${searchTerm}/0`)
+      .get(`/search/${searchTerm}/${offset}`)
       .then((res) => {
         console.log(res);
         setSearchedGifs(res.data);
@@ -69,7 +72,7 @@ const App = () => {
     <div className="App">
       <Router>
       <Main>
-        <Search onSearchSubmit={onSearchSubmit} offset={offset} />
+        <Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
         <Switch>
           <Route path="/search/:searchTerm/:offset" >
               <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
@@ -78,6 +81,8 @@ const App = () => {
               <SearchPage searchedGifs={searchedGifs} />
               <Paginator
                 offset={offset}
+                page={page}
+                setPage={setPage}
                 incrementOffset={incrementOffset}
                 decrementOffset={decrementOffset}
               />

@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import {Button} from '../HomeSearch/styles'
 import axios from 'axios'
 
-const Paginator = ({offset, incrementOffset, decrementOffset}) => {
-    const [page, setPage] = useState(1)
+const Paginator = ({offset, page, setPage, incrementOffset, decrementOffset}) => {
 
     const incrementPageNum = () => {
         incrementOffset()
