@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TrendingStyles = styled.div`
-	/* position: absolute; */
+	position: relative;
 	width: 100%;
 	height: auto;
 `;
@@ -18,14 +18,23 @@ const StyledGrid = styled.div`
 const Title = styled.h3`
 	font-weight: 300;
 `;
-const TrendingPage = ({ trending }) => {
+const TrendingPage = ({ trending, setModalDisplay, setCurrentGif }) => {
 	return (
 		<div>
 			<Title>Trending</Title>
 			<StyledGrid>
 				{trending.map((trending, index) => (
 					<TrendingStyles key={index}>
-						<img src={trending.images.fixed_width.url} alt='' />
+						<img
+							src={trending.images.fixed_width.url}
+							width='100%'
+							height='200px'
+							alt=''
+							onClick={() => {
+								setCurrentGif(trending);
+								setModalDisplay(true);
+							}}
+						/>
 					</TrendingStyles>
 				))}
 			</StyledGrid>
