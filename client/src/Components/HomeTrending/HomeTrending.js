@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import { Button } from "../HomeSearch/styles";
+import {Link} from 'react-router-dom'
 //height:30vh
 //width:100%
 const HomeTrending = ({ trending }) => {
@@ -27,7 +28,9 @@ const HomeTrending = ({ trending }) => {
 	console.log(ref)
 	return (
 		<div styles={styles}>
-			<h1 style={{ color: "white", margin: 0 }}>Trending</h1>
+			<Link to="/trending">
+				<h1 style={{ color: "white", margin: 0 }}>Trending</h1>
+			</Link>
 			<div style={styles.trend}>
 				<Button
 					// disabled={ref}

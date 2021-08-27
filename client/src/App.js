@@ -74,20 +74,12 @@ const App = () => {
       <Router>
       <Main>
         <Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
+        	{/* <TrendingPage
+					setModalDisplay={setModalDisplay}
+					setCurrentGif={setCurrentGif}
+					trending={trending}
+				/> */}
         <Switch>
-          <Route path="/search/:searchTerm/:offset" >
-              <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
-                {searchTerm}
-              </h1>
-              <SearchPage searchedGifs={searchedGifs} />
-              <Paginator
-                offset={offset}
-                page={page}
-                setPage={setPage}
-                incrementOffset={incrementOffset}
-                decrementOffset={decrementOffset}
-              />
-          </Route>
           <Route exact path="/">
             <HomeTrending trending={trending} />
             <HomeCategories
@@ -95,14 +87,43 @@ const App = () => {
               clickedSearch={onSearchSubmit}
             />
           </Route>
+          <Route exact path="/trending">
+              <TrendingPage
+                setModalDisplay={setModalDisplay}
+                setCurrentGif={setCurrentGif}
+                trending={trending}
+              />
+              <Modal shown={modalDisplay}>
+                  <img src={currentGif.images?.original.url} alt='' srcSet='' />
+                  <button onClick={() => setModalDisplay(false)}>Close</button>
+                  <button>Copy Link</button>
+              </Modal>
+          </Route>
+          <Route path="/search/:searchTerm/:page" >
+              <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
+                {searchTerm}
+              </h1>
+              <SearchPage searchedGifs={searchedGifs}
+                setModalDisplay={setModalDisplay}
+                setCurrentGif={setCurrentGif}
+                searchedGifs={searchedGifs}
+              />
+              <Paginator
+                offset={offset}
+                page={page}
+                setPage={setPage}
+                incrementOffset={incrementOffset}
+                decrementOffset={decrementOffset}
+              />
+              <Modal shown={modalDisplay}>
+                  <img src={currentGif.images?.original.url} alt='' srcSet='' />
+                  <button onClick={() => setModalDisplay(false)}>Close</button>
+                  <button>Copy Link</button>
+              </Modal>
+          </Route>
         </Switch>
         </Main>
       </Router>
-      <Modal shown={modalDisplay}>
-					<img src={currentGif.images?.original.url} alt='' srcSet='' />
-					<button onClick={() => setModalDisplay(false)}>Close</button>
-					<button>Copy Link</button>
-				</Modal>
     </div>
   );
 };
