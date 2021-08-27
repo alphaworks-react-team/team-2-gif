@@ -9,7 +9,8 @@ import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
 import Modal from "./Components/Modal/Modal";
 import Paginator from "./Components/Paginator/Paginator";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import CopyButton from './Components/Modal/CopyButton'
 
 const App = () => {
   const [trending, setTrending] = useState([]);
@@ -74,11 +75,6 @@ const App = () => {
       <Router>
       <Main>
         <Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
-        	{/* <TrendingPage
-					setModalDisplay={setModalDisplay}
-					setCurrentGif={setCurrentGif}
-					trending={trending}
-				/> */}
         <Switch>
           <Route exact path="/">
             <HomeTrending trending={trending} />
@@ -96,7 +92,7 @@ const App = () => {
               <Modal shown={modalDisplay}>
                   <img src={currentGif.images?.original.url} alt='' srcSet='' />
                   <button onClick={() => setModalDisplay(false)}>Close</button>
-                  <button>Copy Link</button>
+                  <CopyButton onClick={() => navigator.clipboard.writeText(currentGif.images.original.url)} />
               </Modal>
           </Route>
           <Route path="/search/:searchTerm/:page" >
@@ -118,7 +114,7 @@ const App = () => {
               <Modal shown={modalDisplay}>
                   <img src={currentGif.images?.original.url} alt='' srcSet='' />
                   <button onClick={() => setModalDisplay(false)}>Close</button>
-                  <button>Copy Link</button>
+                  <CopyButton onClick={() => navigator.clipboard.writeText(currentGif.images.original.url)}/>
               </Modal>
           </Route>
         </Switch>
