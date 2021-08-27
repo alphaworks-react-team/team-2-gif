@@ -9,6 +9,7 @@ import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
 import Modal from "./Components/Modal/Modal";
 import Paginator from "./Components/Paginator/Paginator";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 const App = () => {
   const [trending, setTrending] = useState([]);
@@ -32,6 +33,7 @@ const App = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  // this use effect for pagination
   useEffect(() => {
     if (offset >= 0) {
       axios
@@ -42,7 +44,7 @@ const App = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [offset]);
+  }, [offset, searchTerm]);
 
   const incrementOffset = () => {
     setOffset((offset) => offset + 50);
@@ -65,33 +67,41 @@ const App = () => {
 
   return (
     <div className="App">
+      <Router>
       <Main>
-        <Search onSearchSubmit={onSearchSubmit} />
-
-        {/* <TrendingPage trending={trending} /> */}
-        {searchedGifs.length > 1 ? (
-          <div>
-            <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
-              {searchTerm}
-            </h1>
-            <SearchPage searchedGifs={searchedGifs} />
-            <Paginator
-              offset={offset}
-              incrementOffset={incrementOffset}
-              decrementOffset={decrementOffset}
-            />
-          </div>
-        ) : (
-          <div>
+        <Search onSearchSubmit={onSearchSubmit} offset={offset} />
+        <Switch>
+          <Route exact path="/">
             <HomeTrending trending={trending} />
             <HomeCategories
               categories={categories}
               clickedSearch={onSearchSubmit}
             />
+          </Route>
+          <Route exact path="/search/:searchTerm/:offset"  >
+              <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
+                {searchTerm}
+              </h1>
+              <SearchPage searchedGifs={searchedGifs} />
+              <Paginator
+                offset={offset}
+                incrementOffset={incrementOffset}
+                decrementOffset={decrementOffset}
+              />
+          </Route>
+        </Switch>
+        </Main>
+      </Router>
+
+        {/* <TrendingPage trending={trending} />
+        {searchedGifs.length > 1 ? (
+          <div>
+          </div>
+        ) : (
+          <div>
           </div>
         )}
-        <Modal onClick={() => console.log("hello world")}></Modal>
-      </Main>
+        <Modal onClick={() => console.log("hello world")}></Modal> */}
     </div>
   );
 };

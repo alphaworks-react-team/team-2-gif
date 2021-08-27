@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "./styles";
+import {useHistory} from 'react-router'
 //height:100%;
 //width:10vh
 const Search = (props) => {
 	const [searchTerm, setSearchTerm] = useState("");
-	// const [searchData, setSearchData] = useState([])
+	const history = useHistory();
 
 	const onChange = (e) => {
 		setSearchTerm(e.target.value);
@@ -49,7 +50,7 @@ const Search = (props) => {
 					placeholder="search"
 					name="search"
 				/>
-				<Button type="submit" bgColor="#007bff" size="small" color="white" style={styles.button}>
+				<Button type="submit" onClick={() => history.push(`/search/${searchTerm}/0`)} bgColor="#007bff" size="small" color="white" style={styles.button}>
 					Search
 				</Button>
 			</form>
