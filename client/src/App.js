@@ -69,11 +69,11 @@ const App = () => {
 			<Main>
 				<Search onSearchSubmit={onSearchSubmit} />
 
-				<TrendingPage
+				{/* <TrendingPage
 					setModalDisplay={setModalDisplay}
 					setCurrentGif={setCurrentGif}
 					trending={trending}
-				/>
+				/> */}
 
 				{searchedGifs.length > 1 ? (
 					<div>
