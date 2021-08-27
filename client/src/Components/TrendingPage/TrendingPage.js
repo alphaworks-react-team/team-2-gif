@@ -7,8 +7,6 @@ const TrendingStyles = styled.div`
 	height: auto;
 `;
 const StyledGrid = styled.div`
-	
-
 	line-height: 2;
 	-webkit-column-count: 4;
 	-webkit-column-gap: 10px;
@@ -20,14 +18,23 @@ const StyledGrid = styled.div`
 const Title = styled.h3`
 	font-weight: 300;
 `;
-const TrendingPage = ({ trending }) => {
+const TrendingPage = ({ trending, setModalDisplay, setCurrentGif }) => {
 	return (
 		<div>
 			<Title>Trending</Title>
 			<StyledGrid>
 				{trending.map((trending, index) => (
 					<TrendingStyles key={index}>
-						<img src={trending.images.fixed_width.url} alt='' />
+						<img
+							src={trending.images.fixed_width.url}
+							width='100%'
+							height='200px'
+							alt=''
+							onClick={() => {
+								setCurrentGif(trending);
+								setModalDisplay(true);
+							}}
+						/>
 					</TrendingStyles>
 				))}
 			</StyledGrid>

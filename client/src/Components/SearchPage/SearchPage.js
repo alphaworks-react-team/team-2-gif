@@ -19,23 +19,12 @@ const StyledGrid = styled.div`
   column-gap: 10px;
 `;
 
-const SearchPage = ({ searchedGifs }) => {
+const SearchPage = ({ searchedGifs, setModalDisplay, setCurrentGif }) => {
   return (
     <div>
-      {/* <form onSubmit={onSubmit}>
-        <input
-          style={styles.input}
-          value={searchTerm}
-          onChange={onChange}
-          type="text"
-          placeholder="search"
-          name="search"
-        />
-        <Button type="submit" bgColor="#007bff" size="small" color="white">
-          Search
-        </Button>
-      </form> */}
-
+      {searchedGifs.length > 0 ? (
+        <h1 style={{ color: "white" }}>Search result</h1>
+      ) : null}
       <StyledGrid>
         {searchedGifs.map((searchRes, index) => (
           <StyledSearch key={index}>
@@ -43,6 +32,10 @@ const SearchPage = ({ searchedGifs }) => {
               src={searchRes.images.fixed_width.url}
               style={{ width: "100%" }}
               alt=""
+              onClick={() => {
+                setModalDisplay(true);
+                setCurrentGif(searchedGifs[index]);
+              }}
             />
           </StyledSearch>
         ))}
