@@ -109,8 +109,11 @@ const App = () => {
                 setCurrentGif={setCurrentGif}
                 trending={trending}
               />
-              <Modal shown={modalDisplay}>
-                <img src={currentGif.images?.original.url} alt="" srcSet="" />
+              <Modal
+                shown={modalDisplay}
+                img={currentGif.images?.original.url}
+                title={currentGif.title}
+              >
                 <button onClick={() => setModalDisplay(false)}>Close</button>
                 <CopyButton
                   onClick={() =>
@@ -123,8 +126,11 @@ const App = () => {
             </Route>
             <Route exact path="/favs">
               <Favs favGif={favGif} />
-              <Modal shown={modalDisplay}>
-                <img src={currentGif.images?.original.url} alt="" srcSet="" />
+              <Modal
+                shown={modalDisplay}
+                img={currentGif.images?.original.url}
+                title={currentGif.title}
+              >
                 <button onClick={() => setModalDisplay(false)}>Close</button>
                 <CopyButton
                   onClick={() =>
@@ -153,8 +159,11 @@ const App = () => {
                 incrementOffset={incrementOffset}
                 decrementOffset={decrementOffset}
               />
-              <Modal shown={modalDisplay}>
-                <img src={currentGif.images?.original.url} alt="" srcSet="" />
+              <Modal
+                shown={modalDisplay}
+                img={currentGif.images?.original.url}
+                title={currentGif.title}
+              >
                 <button onClick={() => setModalDisplay(false)}>Close</button>
                 <CopyButton
                   onClick={() =>
