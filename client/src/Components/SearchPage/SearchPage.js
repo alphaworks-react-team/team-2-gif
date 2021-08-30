@@ -20,46 +20,45 @@ const StyledGrid = styled.div`
   column-gap: 10px;
 `;
 const iconStyles = {
-	transform: "translateY(-50px)",
-	display:"flex",
-	alignSelf:"flex-end"
+  transform: "translateY(-50px)",
+  display: "flex",
+  alignSelf: "flex-end",
 };
 const SearchPage = ({
-	searchedGifs,
-	setModalDisplay,
-	setCurrentGif,
-	addFavGif,
+  searchedGifs,
+  setModalDisplay,
+  setCurrentGif,
+  addFavGif,
 }) => {
-
   // console.log(searchedGifs);
-	return (
-		<div>
-			{searchedGifs.length > 0 ? (
-				<h1 style={{ color: "white" }}>Search result</h1>
-			) : null}
-			<StyledGrid>
-				{searchedGifs.map((searchRes, index) => (
-					<StyledSearch key={index}>
-						<img
-							src={searchRes.images.fixed_width.url}
-							style={{ width: "100%" }}
-							alt=""
-							onClick={() => {
-								setModalDisplay(true);
-								setCurrentGif(searchedGifs[index]);
-							}}
-						/>
-						<AiFillHeart
-							onClick={() => addFavGif(searchRes.images.fixed_width.url)}
-							color="white"
-							size="2rem"
-							style={iconStyles}
-						/>
-					</StyledSearch>
-				))}
-			</StyledGrid>
-		</div>
-	);
+  return (
+    <div>
+      {searchedGifs.length > 0 ? (
+        <h1 style={{ color: "white" }}>Search result</h1>
+      ) : null}
+      <StyledGrid>
+        {searchedGifs.map((searchRes, index) => (
+          <StyledSearch key={index}>
+            <img
+              src={searchRes.images.fixed_width.url}
+              style={{ width: "100%" }}
+              alt=""
+              onClick={() => {
+                setModalDisplay(true);
+                setCurrentGif(searchedGifs[index]);
+              }}
+            />
+            <AiFillHeart
+              onClick={() => addFavGif(searchRes.images.fixed_width.url)}
+              color="white"
+              size="2rem"
+              style={iconStyles}
+            />
+          </StyledSearch>
+        ))}
+      </StyledGrid>
+    </div>
+  );
 };
 
 export default SearchPage;
