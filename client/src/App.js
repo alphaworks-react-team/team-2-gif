@@ -18,6 +18,7 @@ const App = () => {
 	const [page, setPage] = useState(0);
 	const [modalDisplay, setModalDisplay] = useState(false);
 	const [currentGif, setCurrentGif] = useState({});
+  
 
 	useEffect(() => {
 		axios.get('/api').then(res => {
@@ -100,10 +101,11 @@ const App = () => {
 						/>
 					</div>
 				)}
-				<Modal shown={modalDisplay}>
-					<img src={currentGif.images?.original.url} alt='' srcSet='' />
-					<button onClick={() => setModalDisplay(false)}>Close</button>
-					<button>Copy Link</button>
+				<Modal shown={modalDisplay} title={currentGif.title} img = {currentGif.images?.original.url}>
+					<div>
+						<button onClick={() => setModalDisplay(false)}>Close</button>
+						<button>Copy Link</button>
+					</div>
 				</Modal>
 			</Main>
 		</div>
