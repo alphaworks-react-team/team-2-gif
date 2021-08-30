@@ -47,6 +47,7 @@ const HomeTrending = ({ trending }) => {
 							key={gif.index}
 							src={gif.images.fixed_height.url}
 							alt=""
+							
 							style={styles.img}
 						/>
 					))}

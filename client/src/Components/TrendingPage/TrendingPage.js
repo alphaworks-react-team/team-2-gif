@@ -30,10 +30,7 @@ const TrendingPage = ({ trending, setModalDisplay, setCurrentGif }) => {
 							width='100%'
 							height='200px'
 							alt=''
-							onClick={() => {
-								setCurrentGif(trending);
-								setModalDisplay(true);
-							}}
+							
 						/>
 					</TrendingStyles>
 				))}

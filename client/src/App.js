@@ -24,6 +24,7 @@ const App = () => {
 	const [currentGif, setCurrentGif] = useState({});
 	const [favGif, setFavGif] = useState([]);
 
+
 	useEffect(() => {
 		const favs = localStorage.getItem("favs");
 		if (favs == null) {

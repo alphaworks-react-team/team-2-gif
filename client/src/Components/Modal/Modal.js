@@ -1,34 +1,61 @@
 import styled from 'styled-components';
-
-const TextArea = styled.div`
+// import { Button } from '../HomeSearch/styles';
+const ModalStyle = styled.div`
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	display: flex;
+	align-items: center;
+	justify-content: center;
 
-	justify-content: space-around;
+	transition: 0.3s ease-in;
+	background-color: rgb(0, 0, 0, 0.5);
 `;
-
+const ModalContent = styled.div`
+	min-width: 500px;
+	background-color: #080808;
+`;
+const ModalHeader = styled.div`
+	padding: 10px;
+`;
+const ModalTitle = styled.h2`
+	color: white;
+	padding: 10px;
+`;
+const ModalBody = styled.div`
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+const ModalFooter = styled.div`
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+`;
 const Modal = props => {
 	const styleModal = {
-		width: '500px',
-		height: '500px',
-		background: 'white',
-		border: '1px solid #ccc',
-		transition: '1.1s ease-out',
-		boxShadow: '-2rem 2rem 2rem rgba(black, 0.2)',
-		filter: 'blur(0)',
-		display: 'flex',
-
-		opacity: ' 1',
 		visibility: props.shown === true ? 'visible' : 'hidden',
-		position: 'fixed',
-		top: '50%',
-		left: '50%',
-		transform: 'translate(-50%, -50%)',
 	};
 
 	return (
-		<div style={styleModal} onClick={props.onClick}>
-			<div>{props.children}</div>
-		</div>
+		<ModalStyle style={styleModal} onClick={props.onClick}>
+			<ModalContent>
+				<ModalHeader>
+					<ModalTitle>{props.title}</ModalTitle>
+				</ModalHeader>
+				<ModalBody>
+					<img src={props.img} alt='broken' />
+				</ModalBody>
+				<ModalFooter>
+				
+						{props.children}
+					
+				</ModalFooter>
+			</ModalContent>
+		</ModalStyle>
 	);
 };
 
