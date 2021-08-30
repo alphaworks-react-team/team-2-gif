@@ -31,7 +31,7 @@ const SearchPage = ({
 	addFavGif,
 }) => {
 
-  // console.log(searchedGifs);
+//   console.log(searchedGifs);
 	return (
 		<div>
 			{searchedGifs.length > 0 ? (
@@ -50,7 +50,7 @@ const SearchPage = ({
 							}}
 						/>
 						<AiFillHeart
-							onClick={() => addFavGif(searchRes.images.fixed_width.url)}
+							onClick={() => addFavGif(searchRes.images.fixed_width.url,searchRes.id)}
 							color="white"
 							size="2rem"
 							style={iconStyles}

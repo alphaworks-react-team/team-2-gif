@@ -65,8 +65,8 @@ const App = () => {
 		setOffset((offset) => offset + 50);
 	};
 
-	const addFavGif = (image) => {
-		// console.log(image);
+	const addFavGif = (image,id) => {
+		console.log(id);
 		const favsCopy = [...favGif];
 		favsCopy.push(image);
 		localStorage.setItem("favs", JSON.stringify(favsCopy));
@@ -131,6 +131,7 @@ const App = () => {
 								setModalDisplay={setModalDisplay}
 								setCurrentGif={setCurrentGif}
 								searchedGifs={searchedGifs}
+								addFavGif={()=>addFavGif()}
 							/>
 							<Paginator
 								offset={offset}

@@ -44,7 +44,7 @@ const HomeTrending = ({ trending }) => {
 				<Scroll style={styles.gifs} ref={ref}>
 					{trending.map((gif, index) => (
 						<img
-							key={gif.index}
+							key={index}
 							src={gif.images.fixed_height.url}
 							alt=""
 							style={styles.img}
