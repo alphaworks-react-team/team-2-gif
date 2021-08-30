@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import { Button } from '../HomeSearch/styles';
+
 const ModalStyle = styled.div`
 	position: fixed;
 	top: 0;
@@ -7,6 +7,7 @@ const ModalStyle = styled.div`
 	right: 0;
 	bottom: 0;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 
@@ -33,12 +34,14 @@ const ModalBody = styled.div`
 const ModalFooter = styled.div`
 	padding: 10px;
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
+	align-items: space-around;
 `;
 const Modal = props => {
 	const styleModal = {
 		visibility: props.shown === true ? 'visible' : 'hidden',
 	};
+	
 
 	return (
 		<ModalStyle style={styleModal} onClick={props.onClick}>

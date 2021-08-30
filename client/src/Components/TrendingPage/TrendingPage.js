@@ -28,9 +28,12 @@ const TrendingPage = ({ trending, setModalDisplay, setCurrentGif }) => {
 						<img
 							src={trending.images.fixed_width.url}
 							width='100%'
-							height='200px'
+							height='250px'
 							alt=''
-							
+							onClick={() => {
+								setModalDisplay(true);
+								setCurrentGif(trending);
+							}}
 						/>
 					</TrendingStyles>
 				))}
