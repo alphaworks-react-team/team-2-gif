@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 const Nav = styled.div`
 width: 100%;
 height: 40%;
@@ -10,14 +9,15 @@ display: flex;
 justify-content: space-between;
 `;
 
-const Logo = styled.div`
-background-color: red;
-height: 100%;
-width: 200px;
-display: flex;
-align-items: center;
-justify-content: center;
-`;
+// const Logo = styled.img`
+// background-color: red;
+// background-image: url(${Logo});
+// height: 100%;
+// width: 200px;
+// display: flex;
+// align-items: center;
+// justify-content: center;
+// `;
 const NavMenu = styled.div`
 
 background-color: green;
@@ -39,7 +39,7 @@ const Navbar = () => {
 return (
 	
 	<Nav>
-	<Logo />
+	{/* <Logo /> */}
 		<NavMenu>
 		
 		<NavLink to="/child-a"
