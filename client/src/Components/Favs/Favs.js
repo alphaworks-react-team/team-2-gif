@@ -1,6 +1,9 @@
 import React from "react";
 
 const Favs = ({ favGif }) => {
+
+	
+
 	const styles = {
 		height: "500px",
 		display: "flex",
@@ -14,7 +17,7 @@ const Favs = ({ favGif }) => {
 		<div style={styles}>
 			{favGif.map((favs, index) => (
 				<div key={index} style={styles.img}>
-					<img src={favs} alt="" />
+					<img src={favs.image} alt="" />
 				</div>
 			))}
 		</div>

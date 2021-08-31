@@ -15,9 +15,10 @@ const CopyButton = (props) => {
 
     const divStyles = {
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'no-wrap'
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // flexWrap: 'no-wrap',
+        
     }
 
     return (
@@ -29,7 +30,7 @@ const CopyButton = (props) => {
                 </div>
             ) : (
                 <div onClick={handleCopy} style={divStyles}>
-                        <MdContentCopy onClick={handleCopy} style={{color: "violet", fontSize: '30px'}} />
+                        <MdContentCopy onClick={handleCopy} style={{color: "violet", fontSize: '30px', }} />
                         <h3>Copy</h3>
                 </div>
             )}

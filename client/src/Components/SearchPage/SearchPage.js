@@ -53,7 +53,7 @@ const SearchPage = ({
       <StyledGrid>
         {searchedGifs.map((searchRes, index) => (
           <StyledSearch key={index}>
-            {/* <img
+            <img
               src={searchRes.images.fixed_width.url}
               style={{ width: "100%" }}
               alt=""
@@ -61,18 +61,11 @@ const SearchPage = ({
                 setModalDisplay(true);
                 setCurrentGif(searchedGifs[index]);
               }}
-            /> */}
-
-            <Gif
-              src={searchRes.images.fixed_width.url}
-              onClick={() => {
-                setModalDisplay(true);
-                setCurrentGif(searchedGifs[index]);
-              }}
             />
-
             <AiFillHeart
-              onClick={() => addFavGif(searchRes.images.fixed_width.url)}
+              onClick={() =>
+                addFavGif(searchRes.images.fixed_width.url, searchRes.id)
+              }
               color="white"
               size="2rem"
               style={iconStyles}

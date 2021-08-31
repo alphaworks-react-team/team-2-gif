@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Favs from "./Components/Favs/Favs";
 import CopyButton from "./Components/Modal/CopyButton";
 import Footer from "./Components/Footer/Footer";
+import Navbar from "./Components/Navigation/Navbar";
 const App = () => {
   const [trending, setTrending] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,10 +66,12 @@ const App = () => {
     setOffset((offset) => offset + 50);
   };
 
-  const addFavGif = (image) => {
-    // console.log(image);
+  const addFavGif = (image, id) => {
     const favsCopy = [...favGif];
-    favsCopy.push(image);
+    const existingIds = favsCopy.map((favs) => favs.id);
+    if (!existingIds.includes(id)) {
+      favsCopy.push({ image: image, id: id });
+    }
     localStorage.setItem("favs", JSON.stringify(favsCopy));
     setFavGif(favsCopy);
   };
@@ -95,7 +98,9 @@ const App = () => {
       {/* <Favs favGif={favGif} /> */}
       <Router>
         <Main>
+          <Navbar />
           <Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
+
           <Switch>
             <Route exact path="/">
               <HomeTrending trending={trending} />
@@ -110,8 +115,32 @@ const App = () => {
                 setCurrentGif={setCurrentGif}
                 trending={trending}
               />
-              <Modal shown={modalDisplay}>
-                <img src={currentGif.images?.original.url} alt="" srcSet="" />
+              <Modal
+                shown={modalDisplay}
+                img={currentGif.images?.original.url}
+                alt=""
+                srcSet=""
+                title={currentGif.title}
+              >
+                <button onClick={() => setModalDisplay(false)}>Close</button>
+                <CopyButton
+                  onClick={() =>
+                    navigator.clipboard.writeText(
+                      currentGif.images.original.url
+                    )
+                  }
+                />
+              </Modal>
+            </Route>
+            <Route exact path="/favs">
+              <Favs favGif={favGif} />
+              <Modal
+                shown={modalDisplay}
+                img={currentGif.images?.original.url}
+                alt=""
+                srcSet=""
+                title={currentGif.title}
+              >
                 <button onClick={() => setModalDisplay(false)}>Close</button>
                 <CopyButton
                   onClick={() =>
@@ -131,6 +160,7 @@ const App = () => {
                 setModalDisplay={setModalDisplay}
                 setCurrentGif={setCurrentGif}
                 searchedGifs={searchedGifs}
+                addFavGif={addFavGif}
               />
               <Paginator
                 offset={offset}
@@ -139,8 +169,13 @@ const App = () => {
                 incrementOffset={incrementOffset}
                 decrementOffset={decrementOffset}
               />
-              <Modal shown={modalDisplay}>
-                <img src={currentGif.images?.original.url} alt="" srcSet="" />
+              <Modal
+                shown={modalDisplay}
+                img={currentGif.images?.original.url}
+                alt=""
+                srcSet=""
+                title={currentGif.title}
+              >
                 <button onClick={() => setModalDisplay(false)}>Close</button>
                 <CopyButton
                   onClick={() =>

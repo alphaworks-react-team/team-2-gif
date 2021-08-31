@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-const Box = styled.box`
-padding 80px 60px;
-background:black;
-position: absolute;
-width: 80%;
-
+const Box = styled.div`
+  padding: 80px 60px;
+  background: black;
+  position: absolute;
+  width: 80%;
 `;
+
 const Footer = () => {
   return (
     <div>
