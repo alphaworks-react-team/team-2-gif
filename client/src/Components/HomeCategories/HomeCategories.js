@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components"
+import {useHistory} from 'react-router'
 
 const StyledCategory = styled.div`
     position: relative;
@@ -17,13 +18,19 @@ const StyledGrid = styled.div`
 `
 
 const HomeCategories = ({categories, clickedSearch}) => {
+    const history = useHistory()
+
+    const searchCategory = (index) => {
+        clickedSearch(categories[index].name);
+        history.push(`/search/${categories[index].name}/0`)
+    }
 
     return (
         <div style={{marginTop: '35px'}}>
             <h1 style={{color: "white", margin: '10px'}}>Categories</h1>
         <StyledGrid>
             {categories.map((category, index) => (
-                <StyledCategory key={index} onClick={() => clickedSearch(category.name)} >
+                <StyledCategory key={index} onClick={() => searchCategory(index)} >
                     <h3 style={{position: 'absolute', color: 'white'}}>{category.name}</h3>
                     <img src={category.gif.images.fixed_width.url} style={{width: '100%'}} alt=""/>
                 </StyledCategory>

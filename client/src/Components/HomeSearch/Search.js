@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "./styles";
-
+import {useHistory} from 'react-router'
+//height:100%;
+//width:10vh
 const Search = (props) => {
 	const [searchTerm, setSearchTerm] = useState("");
+	const history = useHistory();
 
 	const onChange = (e) => {
 		setSearchTerm(e.target.value);
@@ -12,19 +15,15 @@ const Search = (props) => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		props.onSearchSubmit(searchTerm);
+		setSearchTerm("")
 	};
     const styles = {
         height: "10vh",
         width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems:"center",
-        
+        marginTop:"10px",
         form: {
-            width:"60%",
             display: "flex",
-            justifyContent: "center",
-            alignItems:"center"
+            justifyContent: "center",            
         },
         input: {
             padding:"10px",
@@ -32,7 +31,8 @@ const Search = (props) => {
 			border: "none",
 			borderRadius: "5px",
             outline: "none",
-            width: "100%",
+            width: "50%",
+            alignSelf:"center"
         },
         button: {
             marginLeft:"10px",
@@ -50,7 +50,7 @@ const Search = (props) => {
 					placeholder="search"
 					name="search"
 				/>
-				<Button type="submit" bgColor="#007bff" size="x-large" color="white" style={styles.button}>
+				<Button type="submit" onClick={() => history.push(`/search/${searchTerm}/0`)} bgColor="#007bff" size="small" color="white" style={styles.button}>
 					Search
 				</Button>
 			</form>
