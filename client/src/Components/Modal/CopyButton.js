@@ -1,6 +1,16 @@
-import React, {useState} from 'react'
-import {MdCheckBox, MdContentCopy} from 'react-icons/md'
+import React, {useState} from 'react';
+import {MdCheckBox, MdContentCopy} from 'react-icons/md';
+import styled from 'styled-components';
 
+const CopyDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    :hover {
+        cursor: pointer;
+    }
+`
 
 const CopyButton = (props) => {
     const [copied, setCopied] = useState(false)
@@ -13,25 +23,18 @@ const CopyButton = (props) => {
         }, 7000);
     }
 
-    const divStyles = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'no-wrap'
-    }
-
     return (
         <div>
             {copied ? (
-                <div style={divStyles}>
+                <CopyDiv>
                         <MdCheckBox style={{color: 'green', fontSize: '30px'}}/>
-                        <h3>Copied!</h3>
-                </div>
+                        <h3 style={{color: "white"}}>Copied!</h3>
+                </CopyDiv>
             ) : (
-                <div onClick={handleCopy} style={divStyles}>
+                <CopyDiv onClick={handleCopy} >
                         <MdContentCopy onClick={handleCopy} style={{color: "violet", fontSize: '30px'}} />
-                        <h3>Copy</h3>
-                </div>
+                        <h3 style={{color: "white"}}>Copy Gif</h3>
+                </CopyDiv>
             )}
         </div>
     )
