@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { AiFillHeart } from "react-icons/ai";
 
 //height:80vh
 //width:100%
@@ -19,23 +18,24 @@ const StyledGrid = styled.div`
   column-count: 4;
   column-gap: 10px;
 `;
-const iconStyles = {
-  transform: "translateY(-50px)",
-  display: "flex",
-  alignSelf: "flex-end",
-};
-const SearchPage = ({
-  searchedGifs,
-  setModalDisplay,
-  setCurrentGif,
-  addFavGif,
-}) => {
-  // console.log(searchedGifs);
+
+const SearchPage = ({ searchedGifs }) => {
   return (
     <div>
-      {searchedGifs.length > 0 ? (
-        <h1 style={{ color: "white" }}>Search result</h1>
-      ) : null}
+      {/* <form onSubmit={onSubmit}>
+        <input
+          style={styles.input}
+          value={searchTerm}
+          onChange={onChange}
+          type="text"
+          placeholder="search"
+          name="search"
+        />
+        <Button type="submit" bgColor="#007bff" size="small" color="white">
+          Search
+        </Button>
+      </form> */}
+
       <StyledGrid>
         {searchedGifs.map((searchRes, index) => (
           <StyledSearch key={index}>
@@ -43,16 +43,6 @@ const SearchPage = ({
               src={searchRes.images.fixed_width.url}
               style={{ width: "100%" }}
               alt=""
-              onClick={() => {
-                setModalDisplay(true);
-                setCurrentGif(searchedGifs[index]);
-              }}
-            />
-            <AiFillHeart
-              onClick={() => addFavGif(searchRes.images.fixed_width.url)}
-              color="white"
-              size="2rem"
-              style={iconStyles}
             />
           </StyledSearch>
         ))}

@@ -7,17 +7,21 @@ import "./App.css";
 import HomeTrending from "./Components/HomeTrending/HomeTrending";
 import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
-import Modal from "./Components/Modal/Modal";
 import Paginator from "./Components/Paginator/Paginator";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Favs from "./Components/Favs/Favs";
 import CopyButton from "./Components/Modal/CopyButton";
 import Navbar from "./Components/Navigation/Navbar";
+
+
+
 const App = () => {
   const [trending, setTrending] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchedGifs, setSearchedGifs] = useState([]);
   const [categories, setCategories] = useState([]);
+
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(1);
   const [modalDisplay, setModalDisplay] = useState(false);
@@ -25,15 +29,8 @@ const App = () => {
   const [favGif, setFavGif] = useState([]);
 
 
-  useEffect(() => {
-    const favs = localStorage.getItem("favs");
-    if (favs == null) {
-      setFavGif([]);
-      localStorage.setItem("favs", JSON.stringify([]));
-    } else {
-      setFavGif(JSON.parse(favs));
-    }
-  }, []);
+
+
 
   useEffect(() => {
     axios.get("/api").then((res) => {
@@ -49,41 +46,30 @@ const App = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  // this use effect for pagination
   useEffect(() => {
-    if (offset >= 0) {
+    if (page > 0) {
       axios
-        .get(`/search/${searchTerm}/${offset}`)
-        .then((res) => {
+      .get(`/search/${searchTerm}/${page}`)
+      .then((res) => {
           console.log(res);
           setSearchedGifs(res.data);
-        })
-        .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
     }
-  }, [offset, searchTerm]);
+}, [page])
 
-  const incrementOffset = () => {
-    setOffset((offset) => offset + 50);
-  };
+const incrementPage = () => {
+  setPage(page => page + 50)
+}
 
-  const addFavGif = (image) => {
-    // console.log(image);
-    const favsCopy = [...favGif];
-    favsCopy.push(image);
-    localStorage.setItem("favs", JSON.stringify(favsCopy));
-    setFavGif(favsCopy);
-  };
-
-  const decrementOffset = () => {
-    setOffset((offset) => offset - 50);
-  };
+  const decrementPage = () => {
+  setPage(page => page - 50)
+}
 
   const onSearchSubmit = (searchTerm) => {
     setSearchTerm(searchTerm);
-    setOffset(0);
-    setPage(1);
     axios
-      .get(`/search/${searchTerm}/${offset}`)
+      .get(`/search/${searchTerm}/0`)
       .then((res) => {
         console.log(res);
         setSearchedGifs(res.data);
@@ -91,8 +77,7 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-
-	return (
+return (
 
 		<div className="App">
 			<Router>
