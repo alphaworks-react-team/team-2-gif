@@ -158,6 +158,7 @@ const App = () => {
 								setModalDisplay={setModalDisplay}
 								setCurrentGif={setCurrentGif}
 								searchedGifs={searchedGifs}
+                addFavGif={addFavGif}
 							/>
 							<Paginator
 								offset={offset}
