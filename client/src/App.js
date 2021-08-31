@@ -127,9 +127,11 @@ const App = () => {
                   onClick={() =>
                     navigator.clipboard.writeText(
                       currentGif.images.original.url
-                    )
-                  }
+                      )
+                    }
                 />
+                <h3 style={{padding: '0', backgroundColor: 'black', color: 'white', border: 'none', cursor: 'pointer'}} 
+                onClick={() => setModalDisplay(false)}>Close</h3>
               </Modal>
             </Route>
             <Route exact path="/favs">
@@ -149,6 +151,8 @@ const App = () => {
                     )
                   }
                 />
+                <h3 style={{padding: '0', backgroundColor: 'black', color: 'white', border: 'none', cursor: 'pointer'}} 
+                onClick={() => setModalDisplay(false)}>Close</h3>
               </Modal>
             </Route>
             <Route path="/search/:searchTerm/:page">
@@ -172,18 +176,22 @@ const App = () => {
               <Modal
                 shown={modalDisplay}
                 img={currentGif.images?.original.url}
-                alt=""
-                srcSet=""
                 title={currentGif.title}
+                clickProp={() =>
+                  navigator.clipboard.writeText(
+                    currentGif.images.original.url
+                  )
+                }
               >
-                <button onClick={() => setModalDisplay(false)}>Close</button>
-                <CopyButton
+                {/* <CopyButton
                   onClick={() =>
                     navigator.clipboard.writeText(
                       currentGif.images.original.url
                     )
                   }
-                />
+                /> */}
+                <h3 style={{padding: '0', backgroundColor: 'black', color: 'white', border: 'none', cursor: 'pointer'}} 
+                onClick={() => setModalDisplay(false)}>Close</h3>
               </Modal>
             </Route>
           </Switch>
