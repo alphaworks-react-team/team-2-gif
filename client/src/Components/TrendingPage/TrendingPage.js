@@ -26,27 +26,27 @@ const Title = styled.h3`
   font-weight: 300;
 `;
 const TrendingPage = ({ trending, setModalDisplay, setCurrentGif }) => {
-  return (
-    <div>
-      <Title>Trending</Title>
-      <StyledGrid>
-        {trending.map((trending, index) => (
-          <TrendingStyles key={index}>
-            <img
-              src={trending.images.fixed_width.url}
-              width="100%"
-              height="250px"
-              alt=""
-              onClick={() => {
-                setModalDisplay(true);
-                setCurrentGif(trending);
-              }}
-            />
-          </TrendingStyles>
-        ))}
-      </StyledGrid>
-    </div>
-  );
+	return (
+		<div>
+			<Title>Trending</Title>
+			<StyledGrid>
+				{trending.map((trending, index) => (
+					<TrendingStyles key={index}>
+						<img
+							src={trending.images.fixed_width.url}
+							width='100%'
+							height='200px'
+							alt=''
+							onClick={() => {
+								setModalDisplay(true);
+								setCurrentGif(trending);
+							}}
+						/>
+					</TrendingStyles>
+				))}
+			</StyledGrid>
+		</div>
+	);
 };
 
 export default TrendingPage;
