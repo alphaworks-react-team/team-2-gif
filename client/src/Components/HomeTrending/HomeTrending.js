@@ -1,17 +1,15 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Button } from "../HomeSearch/styles";
-import {Link} from 'react-router-dom'
 //height:30vh
 //width:100%
 const HomeTrending = ({ trending }) => {
-	const ref = useRef(null);
 	const styles = {
 		height: "30vh",
 		width: "100%",
 		gifs: {
 			display: "flex",
-			overflowX: "scroll",
+			overflowX: "auto",
 			overflowY: "hidden",
 		},
 		img: {
@@ -22,45 +20,25 @@ const HomeTrending = ({ trending }) => {
             alignItems:"center",
         }
     };
-    const scroll = (scrollOffset) => {
-			ref.current.scrollLeft += scrollOffset;
-	};
-	console.log(ref)
+    // const scroll = (scrollOffset) => {
+	// 		ref.current.scrollLeft += scrollOffset;
+	// 	};
 	return (
 		<div styles={styles}>
-			<Link to="/trending">
-				<h1 style={{ color: "white", margin: 0 }}>Trending</h1>
-			</Link>
+			<h1 style={{ color: "white", margin: 0 }}>Trending</h1>
 			<div style={styles.trend}>
-				<Button
-					// disabled={ref}
-					bgColor="black"
-					color="white"
-					size="xx-large"
-					onClick={() => scroll(-1000)}
-				>
-					&lt;
-				</Button>
-				<Scroll style={styles.gifs} ref={ref}>
+                {/* <Button bgColor="#007bff" onClick={() => scroll(-20)}>&lt;</Button> */}
+				<Scroll style={styles.gifs}>
 					{trending.map((gif, index) => (
 						<img
 							key={gif.index}
 							src={gif.images.fixed_height.url}
 							alt=""
-							
 							style={styles.img}
 						/>
 					))}
 				</Scroll>
-				<Button
-					// disabled{!ref}
-					bgColor="black"
-					color="white"
-					size="xx-large"
-					onClick={() => scroll(1000)}
-				>
-					&gt;
-				</Button>
+            {/* <Button onClick={() => scroll(20)} bgColor="#007bff" >&gt;</Button> */}
 			</div>
 		</div>
 	);
@@ -70,7 +48,6 @@ const Scroll = styled.div`
 	::-webkit-scrollbar {
 		display: none;
 	}
-	scroll-behavior: smooth;
     /* scroll-margin-:left() */
 	/* margin-left: 0px;
     margin-right: 150px; */

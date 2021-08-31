@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
-	
-	position: relative;
+position: relative;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
