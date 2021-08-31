@@ -19,6 +19,20 @@ const StyledGrid = styled.div`
   column-count: 4;
   column-gap: 10px;
 `;
+
+const Gif = styled.img.attrs((props) => ({
+  src: props.src,
+  alt: "broken",
+}))`
+  width: 100%;
+
+  &:hover {
+    border: 5px solid white;
+    color: white;
+    background: #fff;
+  }
+`;
+
 const iconStyles = {
   transform: "translateY(-50px)",
   display: "flex",
@@ -49,7 +63,9 @@ const SearchPage = ({
               }}
             />
             <AiFillHeart
-              onClick={() => addFavGif(searchRes.images.fixed_width.url)}
+              onClick={() =>
+                addFavGif(searchRes.images.fixed_width.url, searchRes.id)
+              }
               color="white"
               size="2rem"
               style={iconStyles}
