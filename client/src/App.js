@@ -12,7 +12,7 @@ import Paginator from "./Components/Paginator/Paginator";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Favs from "./Components/Favs/Favs";
 import CopyButton from "./Components/Modal/CopyButton";
-
+import Footer from "./Components/Footer/Footer";
 const App = () => {
   const [trending, setTrending] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -152,6 +152,7 @@ const App = () => {
               </Modal>
             </Route>
           </Switch>
+          <Footer />
         </Main>
       </Router>
     </div>
