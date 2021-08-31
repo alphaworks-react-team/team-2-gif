@@ -14,17 +14,6 @@ import Favs from "./Components/Favs/Favs";
 import CopyButton from "./Components/Modal/CopyButton";
 import Navbar from "./Components/Navigation/Navbar";
 const App = () => {
-<<<<<<< HEAD
-	const [trending, setTrending] = useState([]);
-	const [searchTerm, setSearchTerm] = useState("");
-	const [searchedGifs, setSearchedGifs] = useState([]);
-	const [categories, setCategories] = useState([]);
-	const [offset, setOffset] = useState(0);
-	const [page, setPage] = useState(1);
-	const [modalDisplay, setModalDisplay] = useState(false);
-	const [currentGif, setCurrentGif] = useState({});const [favGif, setFavGif] = useState([]);
-
-=======
   const [trending, setTrending] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchedGifs, setSearchedGifs] = useState([]);
@@ -34,7 +23,6 @@ const App = () => {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [currentGif, setCurrentGif] = useState({});
   const [favGif, setFavGif] = useState([]);
->>>>>>> dev
 
   useEffect(() => {
     const favs = localStorage.getItem("favs");
@@ -102,7 +90,6 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-<<<<<<< HEAD
 	return (
 
 		<div className="App">
@@ -152,6 +139,7 @@ const App = () => {
 								setModalDisplay={setModalDisplay}
 								setCurrentGif={setCurrentGif}
 								searchedGifs={searchedGifs}
+								addFavGif={addFavGif}
 							/>
 							<Paginator
 								offset={offset}
@@ -182,88 +170,6 @@ const App = () => {
 
 		</div>
 	);
-=======
-  return (
-    <div className="App">
-      <Router>
-        <Main>
-          <Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
-          <Switch>
-            <Route exact path="/">
-              <HomeTrending trending={trending} />
-              <HomeCategories
-                categories={categories}
-                clickedSearch={onSearchSubmit}
-              />
-            </Route>
-            <Route exact path="/trending">
-              <TrendingPage
-                setModalDisplay={setModalDisplay}
-                setCurrentGif={setCurrentGif}
-                trending={trending}
-              />
-              <Modal shown={modalDisplay}>
-                <img src={currentGif.images?.original.url} alt="" srcSet="" />
-                <button onClick={() => setModalDisplay(false)}>Close</button>
-                <CopyButton
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      currentGif.images.original.url
-                    )
-                  }
-                />
-              </Modal>
-            </Route>
-            <Route exact path="/favs">
-              <Favs favGif={favGif} />
-              <Modal shown={modalDisplay}>
-                <img src={currentGif.images?.original.url} alt="" srcSet="" />
-                <button onClick={() => setModalDisplay(false)}>Close</button>
-                <CopyButton
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      currentGif.images.original.url
-                    )
-                  }
-                />
-              </Modal>
-            </Route>
-            <Route path="/search/:searchTerm/:page">
-              <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
-                {searchTerm}
-              </h1>
-              <SearchPage
-                searchedGifs={searchedGifs}
-                setModalDisplay={setModalDisplay}
-                setCurrentGif={setCurrentGif}
-                searchedGifs={searchedGifs}
-                addFavGif={addFavGif}
-              />
-              <Paginator
-                offset={offset}
-                page={page}
-                setPage={setPage}
-                incrementOffset={incrementOffset}
-                decrementOffset={decrementOffset}
-              />
-              <Modal shown={modalDisplay}>
-                <img src={currentGif.images?.original.url} alt="" srcSet="" />
-                <button onClick={() => setModalDisplay(false)}>Close</button>
-                <CopyButton
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      currentGif.images.original.url
-                    )
-                  }
-                />
-              </Modal>
-            </Route>
-          </Switch>
-        </Main>
-      </Router>
-    </div>
-  );
->>>>>>> dev
 };
 
 export default App;

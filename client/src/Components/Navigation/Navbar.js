@@ -29,7 +29,7 @@ padding: 10px;
 `;
 const NavLink = styled.div`
 display: flex;
-outline none;
+outline: none;
 
 color: white;
 
