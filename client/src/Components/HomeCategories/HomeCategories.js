@@ -34,10 +34,6 @@ const StyledHeader = styled.h2`
 const StyledImg = styled.img`
     width: 100%;
     border-radius: 10px;
-    /* transition: transform .5s ease;
-    :hover {
-        transform: scale(1.3);
-    } */
 `
 
 const HomeCategories = ({categories, clickedSearch}) => {
