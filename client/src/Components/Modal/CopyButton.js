@@ -28,7 +28,7 @@ const CopyButton = (props) => {
             {copied ? (
                 <CopyDiv>
                         <MdCheckBox style={{color: 'green', fontSize: '30px'}}/>
-                        <h3 style={{color: "white"}}>Copied!</h3>
+                        <h3 style={{color: "white"}}>Copied</h3>
                 </CopyDiv>
             ) : (
                 <CopyDiv onClick={handleCopy} >
