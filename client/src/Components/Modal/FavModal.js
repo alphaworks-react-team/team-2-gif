@@ -76,7 +76,6 @@ const FavModal = (props) => {
         </ModalBody>
         <ModalFooter>
         {props.children}
-        <button style={{color: "white"}} onClick={props.removeFavGif}>Remove from favs</button>
         <CopyButton onClick={handleCopy} />
         </ModalFooter>
     </ModalContent>

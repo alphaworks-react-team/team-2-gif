@@ -9,7 +9,7 @@ const Favs = ({
 	favColor,
 }) => {
 	const styles = {
-		// height: "500px",
+		minHeight: "700px",
 		display: "flex",
 		flexFlow: "row wrap",
 		img: {
