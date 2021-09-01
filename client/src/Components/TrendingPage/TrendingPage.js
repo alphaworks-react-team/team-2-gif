@@ -6,12 +6,12 @@ const TrendingStyles = styled.div`
 	position: relative;
 	width: 100%;
 	height: auto;
-	transition: transform 0.5s ease;
-	
-	&:hover {
-		transform: scale(1.1);
+    transition: transform .5s ease; 
+    :hover {
+        transform: scale(1.1);
 		cursor: pointer;
-	}
+		z-index: 1;
+    }
 `;
 
 const StyledGrid = styled.div`
@@ -30,13 +30,20 @@ font-size: 25px;
 	color: #ffff;
 `;
 
-
+const iconStyles = {
+	position: 'absolute',
+	transform: "translateY(-45px)",
+	display: "flex",
+	alignSelf: "flex-start",
+	paddingLeft: '87%',
+};
 
 const TrendingPage = ({
 	trending,
 	setModalDisplay,
 	setCurrentGif,
 	addFavGif,
+	favColor,
 }) => {
 	const iconStyles = {
 		position: 'absolute',
@@ -50,16 +57,12 @@ const TrendingPage = ({
 			<Title>Trending</Title>
 			<StyledGrid>
 				{trending.map((trending, index) => (
-					<div
-						style={{ overflow: 'hidden', width: '100%', marginBottom: '10px' }}
-					>
-						<TrendingStyles key={index}
-						
-						>
+					<TrendingStyles key={index}>
+						<div style={{width: '100%', marginBottom: '10px'}}>
 							<img
 								src={trending.images.fixed_width.url}
-								style={{ width: '100%', borderRadius: '10px' }}
-								alt=''
+								style={{ width: "100%", borderRadius: '10px' }}
+								alt=""
 								onClick={() => {
 									setModalDisplay(true);
 									setCurrentGif(trending);
@@ -69,12 +72,12 @@ const TrendingPage = ({
 								onClick={() =>
 									addFavGif(trending.images.fixed_width.url, trending.id)
 								}
-								color='white'
-								size='2rem'
+								color={favColor(trending.id) ? "red" : "pink"}
+								size="2rem"
 								style={iconStyles}
 							/>
-						</TrendingStyles>
-					</div>
+						</div>
+					</TrendingStyles>
 				))}
 			</StyledGrid>
 		</div>
