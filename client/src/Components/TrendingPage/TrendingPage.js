@@ -24,7 +24,10 @@ const StyledGrid = styled.div`
 	column-gap: 10px;
 `;
 const Title = styled.h3`
-	font-weight: 300;
+font-size: 25px;
+	font-weight: 500;
+
+	color: #ffff;
 `;
 
 const iconStyles = {
@@ -42,8 +45,15 @@ const TrendingPage = ({
 	addFavGif,
 	favColor,
 }) => {
+	const iconStyles = {
+		position: 'absolute',
+		transform: 'translateY(-45px)',
+		display: 'flex',
+		alignSelf: 'flex-end',
+		paddingLeft: '87%',
+	};
 	return (
-		<div>
+		<div >
 			<Title>Trending</Title>
 			<StyledGrid>
 				{trending.map((trending, index) => (
