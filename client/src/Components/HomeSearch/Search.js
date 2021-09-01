@@ -36,6 +36,7 @@ const Search = (props) => {
         },
         button: {
             marginLeft:"10px",
+						bgColor:'#6E65FF',
         }
 	};
 
