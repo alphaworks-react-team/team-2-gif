@@ -27,6 +27,7 @@ const StyledHeader = styled.h2`
     position: absolute;
     background-image: linear-gradient(to left, violet,indigo,#0651a9, green, yellow, orange, red);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 `
 
