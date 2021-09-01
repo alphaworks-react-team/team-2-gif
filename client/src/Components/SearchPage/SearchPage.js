@@ -9,6 +9,9 @@ const StyledSearch = styled.div`
   position: relative;
   width: 100%;
   height: auto;
+  :hover {
+    cursor: pointer;
+  }
 `;
 const StyledGrid = styled.div`
   line-height: 2;
@@ -34,9 +37,11 @@ const Gif = styled.img.attrs((props) => ({
 `;
 
 const iconStyles = {
-  transform: "translateY(-50px)",
+  position: 'absolute',
+  transform: "translateY(-45px)",
   display: "flex",
-  alignSelf: "flex-end",
+  alignSelf: "flex-start",
+  paddingLeft: '87%',
 };
 const SearchPage = ({
   searchedGifs,
@@ -47,21 +52,19 @@ const SearchPage = ({
   // console.log(searchedGifs);
   return (
     <div>
-      {searchedGifs.length > 0 ? (
-        <h1 style={{ color: "white" }}>Search result</h1>
-      ) : null}
       <StyledGrid>
         {searchedGifs.map((searchRes, index) => (
           <StyledSearch key={index}>
             <img
               src={searchRes.images.fixed_width.url}
-              style={{ width: "100%" }}
+              style={{ width: "100%", borderRadius: '10px' }}
               alt=""
               onClick={() => {
                 setModalDisplay(true);
                 setCurrentGif(searchedGifs[index]);
               }}
             />
+            
             <AiFillHeart
               onClick={() =>
                 addFavGif(searchRes.images.fixed_width.url, searchRes.id)

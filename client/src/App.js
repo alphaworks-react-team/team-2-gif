@@ -95,12 +95,10 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* <Favs favGif={favGif} /> */}
       <Router>
         <Main>
           <Navbar />
           <Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
-
           <Switch>
             <Route exact path="/">
               <HomeTrending trending={trending} />
@@ -118,18 +116,13 @@ const App = () => {
               <Modal
                 shown={modalDisplay}
                 img={currentGif.images?.original.url}
-                alt=""
-                srcSet=""
                 title={currentGif.title}
+                clickProp={() =>
+                  navigator.clipboard.writeText(
+                    currentGif.images.original.url
+                  )
+                }
               >
-                <button onClick={() => setModalDisplay(false)}>Close</button>
-                <CopyButton
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      currentGif.images.original.url
-                      )
-                    }
-                />
                 <h3 style={{padding: '0', backgroundColor: 'black', color: 'white', border: 'none', cursor: 'pointer'}} 
                 onClick={() => setModalDisplay(false)}>Close</h3>
               </Modal>
@@ -139,18 +132,13 @@ const App = () => {
               <Modal
                 shown={modalDisplay}
                 img={currentGif.images?.original.url}
-                alt=""
-                srcSet=""
                 title={currentGif.title}
+                clickProp={() =>
+                  navigator.clipboard.writeText(
+                    currentGif.images.original.url
+                  )
+                }
               >
-                <button onClick={() => setModalDisplay(false)}>Close</button>
-                <CopyButton
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      currentGif.images.original.url
-                    )
-                  }
-                />
                 <h3 style={{padding: '0', backgroundColor: 'black', color: 'white', border: 'none', cursor: 'pointer'}} 
                 onClick={() => setModalDisplay(false)}>Close</h3>
               </Modal>
@@ -183,13 +171,6 @@ const App = () => {
                   )
                 }
               >
-                {/* <CopyButton
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      currentGif.images.original.url
-                    )
-                  }
-                /> */}
                 <h3 style={{padding: '0', backgroundColor: 'black', color: 'white', border: 'none', cursor: 'pointer'}} 
                 onClick={() => setModalDisplay(false)}>Close</h3>
               </Modal>
