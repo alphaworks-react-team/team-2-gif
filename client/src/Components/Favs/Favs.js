@@ -1,9 +1,6 @@
 import React from "react";
 
-const Favs = ({ favGif,setModalDisplay,
-  setCurrentGif }) => {
-
-	
+const Favs = ({ favGif,setModalDisplay,setCurrentGif }) => {
 
 	const styles = {
 		height: "500px",
@@ -22,8 +19,8 @@ const Favs = ({ favGif,setModalDisplay,
 					
 					onClick={() => {
                 setModalDisplay(true);
-                setCurrentGif(favs.image);
-								}}
+                setCurrentGif(favs);
+					}}
 					/>
 					
 				</div>

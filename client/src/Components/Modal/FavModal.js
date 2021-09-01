@@ -42,44 +42,45 @@ const ModalImg = styled.img`
   width: 100%;
   height: 100%;
 `;
-const Modal = (props) => {
-  const [copied, setCopied] = useState(false);
 
-  const styleModal = {
-    visibility: props.shown === true ? "visible" : "hidden",
-  };
+const FavModal = (props) => {
+    const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
-    props.clickProp();
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 7000);
-  };
+    const styleModal = {
+        visibility: props.shown === true ? "visible" : "hidden",
+    };
+    
+    const handleCopy = () => {
+        props.clickProp();
+        setCopied(true);
+        setTimeout(() => {
+            setCopied(false);
+        }, 7000);
+    };
 
-  return (
+    return (
     <ModalStyle style={styleModal} onClick={props.onClick}>
-      <ModalContent>
+    <ModalContent>
         <ModalHeader>
-          <ModalTitle>{props.title}</ModalTitle>
+        <ModalTitle></ModalTitle>
         </ModalHeader>
         <ModalBody>
-          {copied ? (
+        {copied ? (
             <ModalBody>
-              <ModalImg src={props.img} />
-              <h1 style={{ position: "absolute", color: "green" }}>Copied</h1>
+            <ModalImg src={props.img} />
+            <h1 style={{ position: "absolute", color: "green" }}>Copied</h1>
             </ModalBody>
-          ) : (
+        ) : (
             <img src={props.img} alt="broken" />
-          )}
+        )}
         </ModalBody>
         <ModalFooter>
-          {props.children}
-          <CopyButton onClick={handleCopy} />
+        {props.children}
+        <CopyButton onClick={handleCopy} />
         </ModalFooter>
-      </ModalContent>
+    </ModalContent>
     </ModalStyle>
-  );
-};
+    )
+}
 
-export default Modal;
+export default FavModal
