@@ -70,12 +70,35 @@ const App = () => {
     setOffset((offset) => offset - 50);
   };
 
+	const favColor = (id) => {
+		const favsCopy = [...favGif];
+		const existingIds = favsCopy.map((favs) => favs.id);
+		if (!existingIds.includes(id)) {
+			return false;
+		}
+		return true;
+	};
+
+	const removeFavGif = (id) => {
+		const favsCopy = [...favGif];
+		const newFavs = favsCopy.filter((favs) => favs.id !== id);
+		localStorage.setItem("favs", JSON.stringify(newFavs));
+		setFavGif(newFavs);
+	}
+
 	const addFavGif = (image, id) => {
 		const favsCopy = [...favGif];
 		const existingIds = favsCopy.map((favs) => favs.id);
 		if (!existingIds.includes(id)) {
 			favsCopy.push({ image: image, id: id });
+			localStorage.setItem("favs", JSON.stringify(favsCopy));
+			setFavGif(favsCopy);
+		} else {
+			const newFavs = favsCopy.filter((favs) => favs.id !== id);
+			localStorage.setItem("favs", JSON.stringify(newFavs));
+			setFavGif(newFavs);
 		}
+<<<<<<< HEAD
 		localStorage.setItem("favs", JSON.stringify(favsCopy));
 		setFavGif(favsCopy);
   };
@@ -86,6 +109,12 @@ const App = () => {
 		console.log(existingIds)
 		// localStorage.setItem("favs", JSON.stringify(favsCopy));
 		// setFavGif(favsCopy);
+=======
+	};
+
+	const decrementOffset = () => {
+		setOffset((offset) => offset - 50);
+>>>>>>> dev
 	};
 
 	const onSearchSubmit = (searchTerm) => {
@@ -100,7 +129,7 @@ const App = () => {
 			.catch((err) => console.log(err));
 	};
 
-  return (
+	return (
 		<div className="App">
 			<Router>
 				<Main>
@@ -120,6 +149,7 @@ const App = () => {
 								setCurrentGif={setCurrentGif}
 								trending={trending}
 								addFavGif={addFavGif}
+								favColor={favColor}
 							/>
 							<Modal
 								shown={modalDisplay}
@@ -144,11 +174,16 @@ const App = () => {
 							</Modal>
 						</Route>
 						<Route exact path="/favs">
+<<<<<<< HEAD
               <Favs favGif={favGif} 
               setCurrentGif={setCurrentGif} 
               setModalDisplay={setModalDisplay} 
               />
 							<FavModal
+=======
+							<Favs favGif={favGif} removeFavGif={removeFavGif} favColor={favColor} />
+							<Modal
+>>>>>>> dev
 								shown={modalDisplay}
                 img={currentGif?.image}
                 removeFavGif={removeFavGif}
@@ -180,6 +215,7 @@ const App = () => {
 								setCurrentGif={setCurrentGif}
 								searchedGifs={searchedGifs}
 								addFavGif={addFavGif}
+								favColor={favColor}
 							/>
 							<Paginator
 								offset={offset}

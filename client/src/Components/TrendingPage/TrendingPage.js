@@ -40,6 +40,7 @@ const TrendingPage = ({
 	setModalDisplay,
 	setCurrentGif,
 	addFavGif,
+	favColor,
 }) => {
 	return (
 		<div>
@@ -61,7 +62,7 @@ const TrendingPage = ({
 								onClick={() =>
 									addFavGif(trending.images.fixed_width.url, trending.id)
 								}
-								color="white"
+								color={favColor(trending.id) ? "red" : "pink"}
 								size="2rem"
 								style={iconStyles}
 							/>

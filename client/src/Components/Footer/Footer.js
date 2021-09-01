@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Box = styled.div`
-  background: black;
+  background: #121212;
   position: relative;
   width: 100%;
   height: auto;
@@ -13,8 +13,11 @@ const Row = styled.div`
   margin: 10px;
 `;
 
-const a = styled.div`
+const Anchor = styled.a`
   color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 19px;
 `;
 
 const Footer = () => {
@@ -23,10 +26,14 @@ const Footer = () => {
       <Box>
         <h1 style={{}}>Created With ❤️ By:</h1>
         <Row>
-          <a href="https://github.com/dannythedeveloper1">Danny Kebede</a>
-          <a href="https://github.com/andrewjspivey">Andrew Spivey</a>
-          <a href="https://github.com/aleon510">Alex Leon</a>
-          <a href="https://github.com/jerniceduncan"> Jernice Duncan</a>
+          <Anchor href="https://github.com/dannythedeveloper1">
+            Danny Kebede
+          </Anchor>
+          <Anchor href="https://github.com/andrewjspivey">Andrew Spivey</Anchor>
+          <Anchor href="https://github.com/aleon510">Alex Leon</Anchor>
+          <Anchor href="https://github.com/jerniceduncan">
+            Jernice Duncan
+          </Anchor>
         </Row>
       </Box>
     </div>
