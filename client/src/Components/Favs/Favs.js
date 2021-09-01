@@ -1,6 +1,7 @@
 import React from "react";
 
-const Favs = ({ favGif }) => {
+const Favs = ({ favGif,setModalDisplay,
+  setCurrentGif }) => {
 
 	
 
@@ -17,7 +18,14 @@ const Favs = ({ favGif }) => {
 		<div style={styles}>
 			{favGif.map((favs, index) => (
 				<div key={index} style={styles.img}>
-					<img src={favs.image} alt="" />
+					<img src={favs.image} alt=""
+					
+					onClick={() => {
+                setModalDisplay(true);
+                setCurrentGif(favs.image);
+								}}
+					/>
+					
 				</div>
 			))}
 		</div>
