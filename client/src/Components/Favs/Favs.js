@@ -8,7 +8,7 @@ const Favs = ({ favGif,setModalDisplay,
 	const styles = {
 		height: "500px",
 		display: "flex",
-		flexFlow: " wrap",
+		flexFlow: "row wrap",
 		img: {
 			marginRight: "10px",
 		},
