@@ -1,42 +1,42 @@
-import React, { useRef } from "react";
-import styled from "styled-components";
-import { Button } from "../HomeSearch/styles";
-import {Link} from 'react-router-dom'
+import React, { useRef } from 'react';
+import styled from 'styled-components';
+import { Button } from '../HomeSearch/styles';
+import { Link } from 'react-router-dom';
 //height:30vh
 //width:100%
 const HomeTrending = ({ trending }) => {
 	const ref = useRef(null);
 	const styles = {
-		height: "30vh",
-		width: "100%",
+		height: '30vh',
+		width: '100%',
 		gifs: {
-			display: "flex",
-			overflowX: "scroll",
-			overflowY: "hidden",
+			display: 'flex',
+			overflowX: 'scroll',
+			overflowY: 'hidden',
 		},
 		img: {
-			marginRight: "10px",
+			marginRight: '10px',
 		},
-        trend: {
-            display: "flex",
-            alignItems:"center",
-        }
-    };
-    const scroll = (scrollOffset) => {
-			ref.current.scrollLeft += scrollOffset;
+		trend: {
+			display: 'flex',
+			alignItems: 'center',
+		},
 	};
-	console.log(ref)
+	const scroll = scrollOffset => {
+		ref.current.scrollLeft += scrollOffset;
+	};
+	console.log(ref);
 	return (
 		<div styles={styles}>
-			<Link to="/trending">
-				<h1 style={{ color: "white", margin: 0 }}>Trending</h1>
+			<Link to='/trending'>
+				<h1 style={{ color: 'white', margin: 0 }}>Trending</h1>
 			</Link>
 			<div style={styles.trend}>
 				<Button
 					// disabled={ref}
-					bgColor="black"
-					color="white"
-					size="xx-large"
+					bgColor='#121212'
+					color='#ffff'
+					size='xx-large'
 					onClick={() => scroll(-1000)}
 				>
 					&lt;
@@ -46,17 +46,16 @@ const HomeTrending = ({ trending }) => {
 						<img
 							key={index}
 							src={gif.images.fixed_height.url}
-							alt=""
-							
+							alt=''
 							style={styles.img}
 						/>
 					))}
 				</Scroll>
 				<Button
 					// disabled{!ref}
-					bgColor="black"
-					color="white"
-					size="xx-large"
+					bgColor='#121212'
+					color='#ffff'
+					size='xx-large'
 					onClick={() => scroll(1000)}
 				>
 					&gt;
@@ -71,7 +70,7 @@ const Scroll = styled.div`
 		display: none;
 	}
 	scroll-behavior: smooth;
-    /* scroll-margin-:left() */
+	/* scroll-margin-:left() */
 	/* margin-left: 0px;
     margin-right: 150px; */
 `;

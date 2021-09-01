@@ -8,7 +8,7 @@ const MainContainer = styled.div`
 	flex-direction: column;
 	height: 100%;
 	width: 80vw;
-	background-color: black;
+	background-color: #121212;
 `;
 
 const Main = props => {
