@@ -78,6 +78,14 @@ const App = () => {
 		}
 		localStorage.setItem("favs", JSON.stringify(favsCopy));
 		setFavGif(favsCopy);
+  };
+  
+	const removeFavGif = (image, id) => {
+		const favsCopy = [...favGif];
+		const existingIds = favsCopy.map((favs) => favs.id);
+		console.log(existingIds)
+		// localStorage.setItem("favs", JSON.stringify(favsCopy));
+		// setFavGif(favsCopy);
 	};
 
 	const onSearchSubmit = (searchTerm) => {
@@ -143,6 +151,7 @@ const App = () => {
 							<FavModal
 								shown={modalDisplay}
                 img={currentGif?.image}
+                removeFavGif={removeFavGif}
                 clickProp={() =>
 									navigator.clipboard.writeText(currentGif.image)
 								}
