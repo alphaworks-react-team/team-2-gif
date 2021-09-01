@@ -10,7 +10,6 @@ const ModalStyle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   transition: 0.3s ease-in;
   background-color: rgb(0, 0, 0, 0.5);
 `;
@@ -28,11 +27,6 @@ const ModalTitle = styled.h2`
   padding: 10px;
 `;
 const ModalBody = styled.div`
-  background: url(${(props) => props.img});
-  width: 100%;
-  height: 100%;
-  position: relative;
-  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,12 +42,8 @@ const ColorAnimation = keyframes`
   100% {background-color: rgba(63, 191, 63,0.8);}
 `;
 const ModalImg = styled.img`
-  position: absolute;
-  animation-name: ${ColorAnimation};
-  /* animation-timing-function: ease-in; */
-  animation-duration: 3s;
-  /* background: linear-gradient(to bottom, red 50%, #2E7D32 50%); */
-  color: green;
+  opacity: 0.5;
+  color: rgba(63, 191, 63,0.8);
   width: 100%;
   height: 100%;
 `;
@@ -82,7 +72,7 @@ const Modal = (props) => {
         <ModalBody>
           {copied ? (
             <ModalBody>
-              <ModalImg />
+              <ModalImg src={props.img} />
               <h1 style={{ position: "absolute", color: "green" }}>Copied</h1>
             </ModalBody>
           ) : (
