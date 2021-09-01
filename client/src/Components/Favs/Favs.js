@@ -33,7 +33,7 @@ const Favs = ({
 						alt=""
 						onClick={() => {
 							setModalDisplay(true);
-							setCurrentGif(favs.image);
+							setCurrentGif(favs);
 						}}
 					/>
 					<AiFillHeart

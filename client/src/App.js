@@ -8,12 +8,13 @@ import HomeTrending from "./Components/HomeTrending/HomeTrending";
 import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
 import Modal from "./Components/Modal/Modal";
+import FavModal from "./Components/Modal/FavModal";
 import Paginator from "./Components/Paginator/Paginator";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Favs from "./Components/Favs/Favs";
-import CopyButton from "./Components/Modal/CopyButton";
 import Footer from "./Components/Footer/Footer";
 import Navbar from "./Components/Navigation/Navbar";
+
 const App = () => {
 	const [trending, setTrending] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
@@ -65,6 +66,9 @@ const App = () => {
 	const incrementOffset = () => {
 		setOffset((offset) => offset + 50);
 	};
+	const decrementOffset = () => {
+		setOffset((offset) => offset - 50);
+	};
 
 	const favColor = (id) => {
 		const favsCopy = [...favGif];
@@ -96,16 +100,11 @@ const App = () => {
 		}
 	};
 
-	const decrementOffset = () => {
-		setOffset((offset) => offset - 50);
-	};
-
 	const onSearchSubmit = (searchTerm) => {
 		setSearchTerm(searchTerm);
 		setOffset(0);
 		setPage(1);
-		axios
-			.get(`/search/${searchTerm}/${offset}`)
+		axios.get(`/search/${searchTerm}/${offset}`)
 			.then((res) => {
 				console.log(res);
 				setSearchedGifs(res.data);
@@ -158,13 +157,17 @@ const App = () => {
 							</Modal>
 						</Route>
 						<Route exact path="/favs">
-							<Favs favGif={favGif} removeFavGif={removeFavGif} favColor={favColor} />
-							<Modal
+					<Favs favGif={favGif} 
+					setCurrentGif={setCurrentGif} 
+					setModalDisplay={setModalDisplay}
+					removeFavGif={removeFavGif} favColor={favColor}
+					/>
+							<FavModal
 								shown={modalDisplay}
-								img={currentGif.images?.original.url}
-								title={currentGif.title}
+								img={currentGif?.image}
+								removeFavGif={removeFavGif}
 								clickProp={() =>
-									navigator.clipboard.writeText(currentGif.images.original.url)
+									navigator.clipboard.writeText(currentGif.image)
 								}
 							>
 								<h3
@@ -179,7 +182,7 @@ const App = () => {
 								>
 									Close
 								</h3>
-							</Modal>
+							</FavModal>
 						</Route>
 						<Route path="/search/:searchTerm/:page">
 							<h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
