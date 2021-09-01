@@ -6,78 +6,79 @@ import { AiFillHeart } from "react-icons/ai";
 //width:100%
 
 const StyledSearch = styled.div`
-  position: relative;
-  width: 100%;
-  height: auto;
-  :hover {
-    cursor: pointer;
-  }
+	position: relative;
+	width: 100%;
+	height: auto;
+	:hover {
+		cursor: pointer;
+	}
 `;
 const StyledGrid = styled.div`
-  line-height: 2;
-  -webkit-column-count: 4;
-  -webkit-column-gap: 10px;
-  -moz-column-count: 4;
-  -moz-column-gap: 10px;
-  column-count: 4;
-  column-gap: 10px;
+	line-height: 2;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 10px;
+	-moz-column-count: 4;
+	-moz-column-gap: 10px;
+	column-count: 4;
+	column-gap: 10px;
 `;
 
 const Gif = styled.img.attrs((props) => ({
-  src: props.src,
-  alt: "broken",
+	src: props.src,
+	alt: "broken",
 }))`
-  width: 100%;
+	width: 100%;
 
-  &:hover {
-    border: 5px solid white;
-    color: white;
-    background: #fff;
-  }
+	&:hover {
+		border: 5px solid white;
+		color: white;
+		background: #fff;
+	}
 `;
 
 const iconStyles = {
-  position: 'absolute',
-  transform: "translateY(-45px)",
-  display: "flex",
-  alignSelf: "flex-start",
-  paddingLeft: '87%',
+	position: "absolute",
+	transform: "translateY(-45px)",
+	display: "flex",
+	alignSelf: "flex-start",
+	paddingLeft: "87%",
 };
 const SearchPage = ({
-  searchedGifs,
-  setModalDisplay,
-  setCurrentGif,
-  addFavGif,
+	searchedGifs,
+	setModalDisplay,
+	setCurrentGif,
+	addFavGif,
+	favColor,
 }) => {
-  // console.log(searchedGifs);
-  return (
-    <div>
-      <StyledGrid>
-        {searchedGifs.map((searchRes, index) => (
-          <StyledSearch key={index}>
-            <img
-              src={searchRes.images.fixed_width.url}
-              style={{ width: "100%", borderRadius: '10px' }}
-              alt=""
-              onClick={() => {
-                setModalDisplay(true);
-                setCurrentGif(searchedGifs[index]);
-              }}
-            />
-            
-            <AiFillHeart
-              onClick={() =>
-                addFavGif(searchRes.images.fixed_width.url, searchRes.id)
-              }
-              color="white"
-              size="2rem"
-              style={iconStyles}
-            />
-          </StyledSearch>
-        ))}
-      </StyledGrid>
-    </div>
-  );
+	// console.log(searchedGifs);
+	return (
+		<div>
+			<StyledGrid>
+				{searchedGifs.map((searchRes, index) => (
+					<StyledSearch key={index}>
+						<img
+							src={searchRes.images.fixed_width.url}
+							style={{ width: "100%", borderRadius: "10px" }}
+							alt=""
+							onClick={() => {
+								setModalDisplay(true);
+								setCurrentGif(searchedGifs[index]);
+							}}
+						/>
+
+						<AiFillHeart
+							onClick={() =>
+								addFavGif(searchRes.images.fixed_width.url, searchRes.id)
+							}
+							color={favColor(searchRes.id) ? "red" : "pink"}
+							size="2rem"
+							style={iconStyles}
+						/>
+					</StyledSearch>
+				))}
+			</StyledGrid>
+		</div>
+	);
 };
 
 export default SearchPage;
