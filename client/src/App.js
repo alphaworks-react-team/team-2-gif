@@ -66,9 +66,9 @@ const App = () => {
 	const incrementOffset = () => {
 		setOffset((offset) => offset + 50);
 	};
-  const decrementOffset = () => {
-    setOffset((offset) => offset - 50);
-  };
+	const decrementOffset = () => {
+		setOffset((offset) => offset - 50);
+	};
 
 	const favColor = (id) => {
 		const favsCopy = [...favGif];
@@ -98,24 +98,9 @@ const App = () => {
 			localStorage.setItem("favs", JSON.stringify(newFavs));
 			setFavGif(newFavs);
 		}
-<<<<<<< HEAD
 		localStorage.setItem("favs", JSON.stringify(favsCopy));
 		setFavGif(favsCopy);
   };
-  
-	const removeFavGif = (image, id) => {
-		const favsCopy = [...favGif];
-		const existingIds = favsCopy.map((favs) => favs.id);
-		console.log(existingIds)
-		// localStorage.setItem("favs", JSON.stringify(favsCopy));
-		// setFavGif(favsCopy);
-=======
-	};
-
-	const decrementOffset = () => {
-		setOffset((offset) => offset - 50);
->>>>>>> dev
-	};
 
 	const onSearchSubmit = (searchTerm) => {
 		setSearchTerm(searchTerm);
@@ -174,20 +159,16 @@ const App = () => {
 							</Modal>
 						</Route>
 						<Route exact path="/favs">
-<<<<<<< HEAD
               <Favs favGif={favGif} 
               setCurrentGif={setCurrentGif} 
-              setModalDisplay={setModalDisplay} 
+			  setModalDisplay={setModalDisplay} 
+			  removeFavGif={removeFavGif} favColor={favColor}
               />
 							<FavModal
-=======
-							<Favs favGif={favGif} removeFavGif={removeFavGif} favColor={favColor} />
-							<Modal
->>>>>>> dev
 								shown={modalDisplay}
-                img={currentGif?.image}
-                removeFavGif={removeFavGif}
-                clickProp={() =>
+								img={currentGif?.image}
+								removeFavGif={removeFavGif}
+								clickProp={() =>
 									navigator.clipboard.writeText(currentGif.image)
 								}
 							>
