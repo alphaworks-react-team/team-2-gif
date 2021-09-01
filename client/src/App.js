@@ -15,172 +15,197 @@ import CopyButton from "./Components/Modal/CopyButton";
 import Footer from "./Components/Footer/Footer";
 import Navbar from "./Components/Navigation/Navbar";
 const App = () => {
-  const [trending, setTrending] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchedGifs, setSearchedGifs] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const [page, setPage] = useState(1);
-  const [modalDisplay, setModalDisplay] = useState(false);
-  const [currentGif, setCurrentGif] = useState({});
-  const [favGif, setFavGif] = useState([]);
+	const [trending, setTrending] = useState([]);
+	const [searchTerm, setSearchTerm] = useState("");
+	const [searchedGifs, setSearchedGifs] = useState([]);
+	const [categories, setCategories] = useState([]);
+	const [offset, setOffset] = useState(0);
+	const [page, setPage] = useState(1);
+	const [modalDisplay, setModalDisplay] = useState(false);
+	const [currentGif, setCurrentGif] = useState({});
+	const [favGif, setFavGif] = useState([]);
 
-  useEffect(() => {
-    const favs = localStorage.getItem("favs");
-    if (favs == null) {
-      setFavGif([]);
-      localStorage.setItem("favs", JSON.stringify([]));
-    } else {
-      setFavGif(JSON.parse(favs));
-    }
-  }, []);
+	useEffect(() => {
+		const favs = localStorage.getItem("favs");
+		if (favs == null) {
+			setFavGif([]);
+			localStorage.setItem("favs", JSON.stringify([]));
+		} else {
+			setFavGif(JSON.parse(favs));
+		}
+	}, []);
 
-  useEffect(() => {
-    axios.get("/api").then((res) => {
-      console.log(res);
-      setTrending(res.data);
-    });
-    axios
-      .get("/categories")
-      .then((res) => {
-        console.log(res);
-        setCategories(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+	useEffect(() => {
+		axios.get("/api").then((res) => {
+			console.log(res);
+			setTrending(res.data);
+		});
+		axios
+			.get("/categories")
+			.then((res) => {
+				console.log(res);
+				setCategories(res.data);
+			})
+			.catch((err) => console.log(err));
+	}, []);
 
-  // this use effect for pagination
-  useEffect(() => {
-    if (offset >= 0) {
-      axios
-        .get(`/search/${searchTerm}/${offset}`)
-        .then((res) => {
-          console.log(res);
-          setSearchedGifs(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [offset, searchTerm]);
+	// this use effect for pagination
+	useEffect(() => {
+		if (offset >= 0) {
+			axios
+				.get(`/search/${searchTerm}/${offset}`)
+				.then((res) => {
+					console.log(res);
+					setSearchedGifs(res.data);
+				})
+				.catch((err) => console.log(err));
+		}
+	}, [offset, searchTerm]);
 
-  const incrementOffset = () => {
-    setOffset((offset) => offset + 50);
-  };
+	const incrementOffset = () => {
+		setOffset((offset) => offset + 50);
+	};
 
-  const addFavGif = (image, id) => {
-    const favsCopy = [...favGif];
-    const existingIds = favsCopy.map((favs) => favs.id);
-    if (!existingIds.includes(id)) {
-      favsCopy.push({ image: image, id: id });
-    }
-    localStorage.setItem("favs", JSON.stringify(favsCopy));
-    setFavGif(favsCopy);
-  };
+	const addFavGif = (image, id) => {
+		const favsCopy = [...favGif];
+		const existingIds = favsCopy.map((favs) => favs.id);
+		if (!existingIds.includes(id)) {
+			favsCopy.push({ image: image, id: id });
+		}
+		localStorage.setItem("favs", JSON.stringify(favsCopy));
+		setFavGif(favsCopy);
+	};
 
-  const decrementOffset = () => {
-    setOffset((offset) => offset - 50);
-  };
+	const decrementOffset = () => {
+		setOffset((offset) => offset - 50);
+	};
 
-  const onSearchSubmit = (searchTerm) => {
-    setSearchTerm(searchTerm);
-    setOffset(0);
-    setPage(1);
-    axios
-      .get(`/search/${searchTerm}/${offset}`)
-      .then((res) => {
-        console.log(res);
-        setSearchedGifs(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
+	const onSearchSubmit = (searchTerm) => {
+		setSearchTerm(searchTerm);
+		setOffset(0);
+		setPage(1);
+		axios
+			.get(`/search/${searchTerm}/${offset}`)
+			.then((res) => {
+				console.log(res);
+				setSearchedGifs(res.data);
+			})
+			.catch((err) => console.log(err));
+	};
 
   return (
-    <div className="App">
-      <Router>
-        <Main>
-          <Navbar />
-          <Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
-          <Switch>
-            <Route exact path="/">
-              <HomeTrending trending={trending} />
-              <HomeCategories
-                categories={categories}
-                clickedSearch={onSearchSubmit}
-              />
-            </Route>
-            <Route exact path="/trending">
-              <TrendingPage
-                setModalDisplay={setModalDisplay}
-                setCurrentGif={setCurrentGif}
-                trending={trending}
-              />
-              <Modal
-                shown={modalDisplay}
-                img={currentGif.images?.original.url}
-                title={currentGif.title}
-                clickProp={() =>
-                  navigator.clipboard.writeText(
-                    currentGif.images.original.url
-                  )
-                }
-              >
-                <h3 style={{padding: '0', backgroundColor: 'black', color: 'white', border: 'none', cursor: 'pointer'}} 
-                onClick={() => setModalDisplay(false)}>Close</h3>
-              </Modal>
-            </Route>
-            <Route exact path="/favs">
-              <Favs favGif={favGif} />
-              <Modal
-                shown={modalDisplay}
-                img={currentGif.images?.original.url}
-                title={currentGif.title}
-                clickProp={() =>
-                  navigator.clipboard.writeText(
-                    currentGif.images.original.url
-                  )
-                }
-              >
-                <h3 style={{padding: '0', backgroundColor: 'black', color: 'white', border: 'none', cursor: 'pointer'}} 
-                onClick={() => setModalDisplay(false)}>Close</h3>
-              </Modal>
-            </Route>
-            <Route path="/search/:searchTerm/:page">
-              <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
-                {searchTerm}
-              </h1>
-              <SearchPage
-                searchedGifs={searchedGifs}
-                setModalDisplay={setModalDisplay}
-                setCurrentGif={setCurrentGif}
-                searchedGifs={searchedGifs}
-                addFavGif={addFavGif}
-              />
-              <Paginator
-                offset={offset}
-                page={page}
-                setPage={setPage}
-                incrementOffset={incrementOffset}
-                decrementOffset={decrementOffset}
-              />
-              <Modal
-                shown={modalDisplay}
-                img={currentGif.images?.original.url}
-                title={currentGif.title}
-                clickProp={() =>
-                  navigator.clipboard.writeText(
-                    currentGif.images.original.url
-                  )
-                }
-              >
-                <h3 style={{padding: '0', backgroundColor: 'black', color: 'white', border: 'none', cursor: 'pointer'}} 
-                onClick={() => setModalDisplay(false)}>Close</h3>
-              </Modal>
-            </Route>
-          </Switch>
-          <Footer />
-        </Main>
-      </Router>
-    </div>
-  );
+		<div className="App">
+			<Router>
+				<Main>
+					<Navbar />
+					<Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
+					<Switch>
+						<Route exact path="/">
+							<HomeTrending trending={trending} />
+							<HomeCategories
+								categories={categories}
+								clickedSearch={onSearchSubmit}
+							/>
+						</Route>
+						<Route exact path="/trending">
+							<TrendingPage
+								setModalDisplay={setModalDisplay}
+								setCurrentGif={setCurrentGif}
+								trending={trending}
+								addFavGif={addFavGif}
+							/>
+							<Modal
+								shown={modalDisplay}
+								img={currentGif.images?.original.url}
+								title={currentGif.title}
+								clickProp={() =>
+									navigator.clipboard.writeText(currentGif.images.original.url)
+								}
+							>
+								<h3
+									style={{
+										padding: "0",
+										backgroundColor: "black",
+										color: "white",
+										border: "none",
+										cursor: "pointer",
+									}}
+									onClick={() => setModalDisplay(false)}
+								>
+									Close
+								</h3>
+							</Modal>
+						</Route>
+						<Route exact path="/favs">
+							<Favs favGif={favGif} />
+							<Modal
+								shown={modalDisplay}
+								img={currentGif.images?.original.url}
+								title={currentGif.title}
+								clickProp={() =>
+									navigator.clipboard.writeText(currentGif.images.original.url)
+								}
+							>
+								<h3
+									style={{
+										padding: "0",
+										backgroundColor: "black",
+										color: "white",
+										border: "none",
+										cursor: "pointer",
+									}}
+									onClick={() => setModalDisplay(false)}
+								>
+									Close
+								</h3>
+							</Modal>
+						</Route>
+						<Route path="/search/:searchTerm/:page">
+							<h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
+								{searchTerm}
+							</h1>
+							<SearchPage
+								searchedGifs={searchedGifs}
+								setModalDisplay={setModalDisplay}
+								setCurrentGif={setCurrentGif}
+								searchedGifs={searchedGifs}
+								addFavGif={addFavGif}
+							/>
+							<Paginator
+								offset={offset}
+								page={page}
+								setPage={setPage}
+								incrementOffset={incrementOffset}
+								decrementOffset={decrementOffset}
+							/>
+							<Modal
+								shown={modalDisplay}
+								img={currentGif.images?.original.url}
+								title={currentGif.title}
+								clickProp={() =>
+									navigator.clipboard.writeText(currentGif.images.original.url)
+								}
+							>
+								<h3
+									style={{
+										padding: "0",
+										backgroundColor: "black",
+										color: "white",
+										border: "none",
+										cursor: "pointer",
+									}}
+									onClick={() => setModalDisplay(false)}
+								>
+									Close
+								</h3>
+							</Modal>
+						</Route>
+					</Switch>
+					<Footer />
+				</Main>
+			</Router>
+		</div>
+	);
 };
 
 export default App;
