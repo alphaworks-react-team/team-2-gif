@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import giphy from '../Image/giphy209px.png';
+import { Button } from '../HomeSearch/styles';
 import { Link } from 'react-router-dom';
 const Nav = styled.div`
 	width: 100%;
 	height: 70px;
 	background-color: #121212;
 	display: flex;
-	justify-content: flex-start;
-	
-	
+	justify-content: space-around;
 `;
 
 const Logo = styled.div`
@@ -31,17 +30,9 @@ const NavMenu = styled.div`
 	flex-direction: row;
 	align-items: center;
 	height: 100%;
-	
-`;
-const NavLink = styled.div`
-	display: flex;
-	padding: 10px;
-	color: #ffff;
-
-	
 `;
 
-const Navbar = () => {
+const Navbar = ({ getRandom, setModalDisplay }) => {
 	const linkStyles = {
 		display: 'flex',
 		padding: '10px',
@@ -49,6 +40,10 @@ const Navbar = () => {
 		fontWeight: '600',
 		fontSize: '23px',
 		textDecoration: 'none',
+	};
+	const buttonStyles = {
+		display: 'flex',
+		alignItems: 'center',
 	};
 	return (
 		<Nav>
@@ -64,10 +59,21 @@ const Navbar = () => {
 					<Link to='/favs' style={linkStyles}>
 						Favorite Gifs
 					</Link>
-					<Link to='search/:searchTerm/:page' style={linkStyles}>
-						Random Gifs
-					</Link>
 				</NavMenu>
+			</div>
+			<div style={buttonStyles}>
+				<Button
+					type='button'
+					bgColor='#7e4fff'
+					color='#ffff'
+					size='x-large'
+					color='white'
+					onClick={() => {
+						getRandom();
+					}}
+				>
+					Random Gifs
+				</Button>
 			</div>
 		</Nav>
 	);
