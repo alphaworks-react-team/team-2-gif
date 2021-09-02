@@ -40,8 +40,7 @@ const iconStyles = {
 	position: "absolute",
 	transform: "translateY(-45px)",
 	display: "flex",
-	alignSelf: "flex-start",
-	paddingLeft: "87%",
+
 };
 const SearchPage = ({
 	searchedGifs,
@@ -50,7 +49,7 @@ const SearchPage = ({
 	addFavGif,
 	favColor,
 }) => {
-	// console.log(searchedGifs);
+
 	return (
 		<div>
 			<StyledGrid>

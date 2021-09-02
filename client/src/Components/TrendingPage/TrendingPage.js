@@ -23,7 +23,7 @@ const StyledGrid = styled.div`
 	column-count: 4;
 	column-gap: 10px;
 `;
-const Title = styled.h3`
+const Title = styled.h2`
 font-size: 25px;
 	font-weight: 500;
 
@@ -49,8 +49,8 @@ const TrendingPage = ({
 		position: 'absolute',
 		transform: 'translateY(-45px)',
 		display: 'flex',
-		alignSelf: 'flex-end',
-		paddingLeft: '87%',
+		// alignSelf: 'flex-end',
+		// paddingLeft: '87%',
 	};
 	return (
 		<div >
