@@ -28,12 +28,12 @@ const Paginator = ({offset, page, setPage, incrementOffset, decrementOffset}) =>
             <div style={styles}>
                 {page > 1 ? (
                     <div style={styles}>
-                        <Button style={{width: '60px', borderRadius: '5px'}} bgColor="#007bff" size='30px' color="white" onClick={decrementPageNum}>&lt;</Button>
+                        <Button style={{width: '60px', borderRadius: '5px'}} bgColor='#6E65FF' size='30px' color="white" onClick={decrementPageNum}>&lt;</Button>
                         <p>---------</p>
-                        <Button style={{width: '60px', borderRadius: '5px'}} bgColor="#007bff" size='30px' color="white" onClick={incrementPageNum}>&gt;</Button>
+                        <Button style={{width: '60px', borderRadius: '5px'}} bgColor='#6E65FF' size='30px' color="white" onClick={incrementPageNum}>&gt;</Button>
                     </div>
                 ) : (
-                    <Button style={{width: '60px', borderRadius: '5px'}} bgColor="#007bff" size='30px' color="white" onClick={incrementPageNum}>&gt;</Button>
+                    <Button style={{width: '60px', borderRadius: '5px'}} bgColor='#6E65FF' size='30px' color="white" onClick={incrementPageNum}>&gt;</Button>
                 )}
             </div>
         </div>
