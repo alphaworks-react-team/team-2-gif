@@ -12,7 +12,7 @@ const ModalStyle = styled.div`
 	justify-content: center;
 	transition: 0.3s ease-in;
 	background-color: rgb(0, 0, 0, 0.5);
-	z-index: 1;
+	z-index: 2;
 `;
 const ModalContent = styled.div`
 	min-width: 500px;
@@ -44,8 +44,9 @@ const ModalImg = styled.img`
 	height: 100%;
 `;
 
-const Modal = props => {
-	const [copied, setCopied] = useState(false);
+const RandomModal = props => {
+    const [copied, setCopied] = useState(false);
+
 
 	const styleModal = {
 		visibility: props.shown === true ? 'visible' : 'hidden',
@@ -57,6 +58,10 @@ const Modal = props => {
 		setTimeout(() => {
 			setCopied(false);
 		}, 7000);
+    };
+    
+	const handleClose = () => {
+		props.randomCloseHelper()
 	};
 
 	return (
@@ -76,7 +81,17 @@ const Modal = props => {
 					)}
 				</ModalBody>
 				<ModalFooter>
-					{props.children}
+                    <h3
+                        style={{
+                            padding: '0',
+                            backgroundColor: 'black',
+                            color: 'white',
+                            border: 'none',
+                            cursor: 'pointer',
+                        }}
+                        onClick={handleClose}
+                        >Close
+                    </h3>
 					<CopyButton onClick={handleCopy} />
 				</ModalFooter>
 			</ModalContent>
@@ -84,4 +99,4 @@ const Modal = props => {
 	);
 };
 
-export default Modal;
+export default RandomModal;

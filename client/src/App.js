@@ -9,6 +9,7 @@ import TrendingPage from './Components/TrendingPage/TrendingPage';
 import SearchPage from './Components/SearchPage/SearchPage';
 import Modal from './Components/Modal/Modal';
 import FavModal from './Components/Modal/FavModal';
+import RandomModal from './Components/Modal/RandomModal';
 import Paginator from './Components/Paginator/Paginator';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Favs from './Components/Favs/Favs';
@@ -23,9 +24,9 @@ const App = () => {
 	const [offset, setOffset] = useState(0);
 	const [page, setPage] = useState(1);
 	const [modalDisplay, setModalDisplay] = useState(false);
+	const [randModalDisplay, setRandModalDisplay] = useState(false);
 	const [currentGif, setCurrentGif] = useState({});
 	const [favGif, setFavGif] = useState([]);
-
 	const [randomGif, setRandomGif] = useState('');
 
 	useEffect(() => {
@@ -52,12 +53,6 @@ const App = () => {
 			.catch(err => console.log(err));
 	}, []);
 
-	const getRandom = () => {
-		axios.get('/random').then(res => {
-			setRandomGif(res.data.images.fixed_width.url);
-			setModalDisplay(true);
-		});
-	};
 	// this use effect for pagination
 	useEffect(() => {
 		if (offset >= 0) {
@@ -121,15 +116,33 @@ const App = () => {
 			.catch(err => console.log(err));
 	};
 
+	const getRandom = () => {
+		axios.get('/random').then(res => {
+			setRandomGif(res.data.images.original.url);
+		});
+	};
+
+	const randomCloseHelper = () => {
+		setRandomGif('')
+		setRandModalDisplay(false)
+	}
+
+	const modalCloseHelper = async () => {
+		setCurrentGif({})
+		setModalDisplay(false)
+	}
+
 	return (
 		<div className='App'>
 			<Router>
 				<Main>
-					<Navbar setModalDisplay={setModalDisplay} getRandom={getRandom} />
+					<Navbar setRandModalDisplay={setRandModalDisplay} getRandom={getRandom} />
 					<Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
-					{modalDisplay && (
-						<Modal
-							shown={modalDisplay}
+					{randomGif !== '' && 
+						<RandomModal
+							randomCloseHelper={randomCloseHelper}
+							randomGif={randomGif}
+							shown={randModalDisplay}
 							img={randomGif}
 							title={'Gif'}
 							clickProp={() => {
@@ -137,20 +150,8 @@ const App = () => {
 								navigator.clipboard.writeText(randomGif);
 							}}
 						>
-							<h3
-								style={{
-									padding: '0',
-									backgroundColor: 'black',
-									color: 'white',
-									border: 'none',
-									cursor: 'pointer',
-								}}
-								onClick={() => setModalDisplay(false)}
-							>
-								Close
-							</h3>
-						</Modal>
-					)}
+						</RandomModal>
+					}
 					<Switch>
 						<Route exact path='/'>
 							<HomeTrending trending={trending} />
@@ -167,6 +168,7 @@ const App = () => {
 								addFavGif={addFavGif}
 								favColor={favColor}
 							/>
+						{currentGif.type &&
 							<Modal
 								shown={modalDisplay}
 								img={currentGif.images?.original.url}
@@ -183,11 +185,12 @@ const App = () => {
 										border: 'none',
 										cursor: 'pointer',
 									}}
-									onClick={() => setModalDisplay(false)}
+									onClick={() => modalCloseHelper()}
 								>
 									Close
 								</h3>
 							</Modal>
+						}
 						</Route>
 						<Route exact path='/favs'>
 							<Favs
@@ -213,7 +216,7 @@ const App = () => {
 										border: 'none',
 										cursor: 'pointer',
 									}}
-									onClick={() => setModalDisplay(false)}
+									onClick={() => modalCloseHelper()}
 								>
 									Close
 								</h3>
@@ -238,6 +241,7 @@ const App = () => {
 								incrementOffset={incrementOffset}
 								decrementOffset={decrementOffset}
 							/>
+							{currentGif.type &&
 							<Modal
 								shown={modalDisplay}
 								img={currentGif.images?.original.url}
@@ -254,11 +258,12 @@ const App = () => {
 										border: 'none',
 										cursor: 'pointer',
 									}}
-									onClick={() => setModalDisplay(false)}
+									onClick={() => modalCloseHelper()}
 								>
 									Close
 								</h3>
 							</Modal>
+							}
 						</Route>
 					</Switch>
 					<Footer />

@@ -59,15 +59,17 @@ const StyledHeader = styled.h2`
 	};
 `
 
-const Navbar = ({ getRandom, setModalDisplay }) => {
+const Navbar = ({ getRandom, setRandModalDisplay }) => {
 	const linkStyles = {
 		fontWeight: '600',
 		textDecorationColor: 'linear-gradient(90deg, rgba(11,191,255,1) 0%, rgba(126,79,255,1) 50%, rgba(198,61,212,1) 100%)',
 	};
-	const buttonStyles = {
-		display: 'flex',
-		alignItems: 'center',
-	};
+
+	const handleRandom = () => {
+		getRandom()
+		setRandModalDisplay(true)
+	}
+
 	return (
 		<Nav>
 			<Link to='/'>
@@ -87,14 +89,12 @@ const Navbar = ({ getRandom, setModalDisplay }) => {
 					size='x-large'
 					color='white'
 					onClick={() => {
-						getRandom();
+						handleRandom();
 					}}
 				>
 					Random Gif
 				</Button>
 				</NavMenu>
-			{/* <div style={buttonStyles}>
-			</div> */}
 		</Nav>
 	);
 };
