@@ -60,8 +60,8 @@ const SearchPage = ({
 							style={{ width: "100%", borderRadius: "10px" }}
 							alt=""
 							onClick={() => {
-								setModalDisplay(true);
 								setCurrentGif(searchedGifs[index]);
+								setModalDisplay(true);
 							}}
 						/>
 

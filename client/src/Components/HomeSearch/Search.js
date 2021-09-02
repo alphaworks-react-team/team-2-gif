@@ -39,6 +39,14 @@ const Search = props => {
         }
 	};
 
+	const searchCheck = () => {
+		if (!searchTerm) {
+			alert('please type a search term')
+		} else {
+			history.push(`/search/${searchTerm}/0`)
+		}
+	}
+
 	return (
 		<div style={styles}>
 			<form onSubmit={onSubmit} style={styles.form}>
@@ -52,7 +60,7 @@ const Search = props => {
 				/>
 				<Button
 					type='submit'
-					onClick={() => history.push(`/search/${searchTerm}/0`)}
+					onClick={() => searchCheck()}
 					bgColor='#6E65FF'
 					size='small'
 					color='white'
