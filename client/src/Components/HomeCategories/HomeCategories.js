@@ -25,7 +25,7 @@ const StyledGrid = styled.div`
 const StyledHeader = styled.h2`
     padding-left: 15px;
     position: absolute;
-    background-image: linear-gradient(to left, violet,indigo,#0651a9, green, yellow, orange, red);
+    background-image: linear-gradient(90deg, rgba(11,191,255,1) 0%, rgba(126,79,255,1) 50%, rgba(198,61,212,1) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

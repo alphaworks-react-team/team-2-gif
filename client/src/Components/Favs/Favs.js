@@ -38,9 +38,9 @@ const Favs = ({
 	favColor,
 }) => {
 	const styles = {
-		minHeight: '500px',
-		display: 'flex',
-		flexFlow: 'row wrap',
+		minHeight: "700px",
+		display: "flex",
+		flexFlow: "row wrap",
 		img: {
 			marginRight: '10px',
 		},

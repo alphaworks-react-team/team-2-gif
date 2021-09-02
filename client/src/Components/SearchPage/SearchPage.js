@@ -57,7 +57,7 @@ const SearchPage = ({
 					<StyledSearch key={index}>
 						<img
 							src={searchRes.images.fixed_width.url}
-							style={{display: 'flex', justiyContent:'end', width: "100%", borderRadius: "10px" }}
+							style={{ width: "100%", borderRadius: "10px" }}
 							alt=""
 							onClick={() => {
 								setModalDisplay(true);

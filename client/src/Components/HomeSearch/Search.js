@@ -17,26 +17,26 @@ const Search = props => {
 		props.onSearchSubmit(searchTerm);
 		setSearchTerm('');
 	};
-	const styles = {
-		height: '10vh',
-		width: '100%',
-		marginTop: '10px',
-		form: {
-			display: 'flex',
-			justifyContent: 'center',
-		},
-		input: {
-			padding: '10px',
-			backgroundColor: 'lightgray',
-			border: 'none',
-			borderRadius: '5px',
-			outline: 'none',
-			width: '50%',
-			alignSelf: 'center',
-		},
-		button: {
-			marginLeft: '10px',
-		},
+    const styles = {
+        height: "10vh",
+        width: "100%",
+        marginTop:"10px",
+        form: {
+            display: "flex",
+            justifyContent: "center",            
+        },
+        input: {
+            padding:"10px",
+			backgroundColor: "lightgray",
+			border: "none",
+            outline: "none",
+            width: "70%",
+            alignSelf:"center"
+        },
+        button: {
+            marginLeft:"10px",
+						bgColor:'#6E65FF',
+        }
 	};
 
 	return (
