@@ -40,8 +40,7 @@ const iconStyles = {
 	position: "absolute",
 	transform: "translateY(-45px)",
 	display: "flex",
-	alignSelf: "flex-start",
-	paddingLeft: "87%",
+
 };
 const SearchPage = ({
 	searchedGifs,
@@ -50,7 +49,7 @@ const SearchPage = ({
 	addFavGif,
 	favColor,
 }) => {
-	// console.log(searchedGifs);
+
 	return (
 		<div>
 			<StyledGrid>
@@ -58,7 +57,7 @@ const SearchPage = ({
 					<StyledSearch key={index}>
 						<img
 							src={searchRes.images.fixed_width.url}
-							style={{ width: "100%", borderRadius: "10px" }}
+							style={{display: 'flex', justiyContent:'end', width: "100%", borderRadius: "10px" }}
 							alt=""
 							onClick={() => {
 								setModalDisplay(true);
