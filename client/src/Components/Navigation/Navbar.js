@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import giphy from '../Image/giphy209px.png';
+import { Button } from '../HomeSearch/styles';
 import { Link } from 'react-router-dom';
 const Nav = styled.div`
 	width: 100%;
@@ -58,12 +59,15 @@ const StyledHeader = styled.h2`
 	};
 `
 
-const Navbar = () => {
+const Navbar = ({ getRandom, setModalDisplay }) => {
 	const linkStyles = {
 		fontWeight: '600',
 		textDecorationColor: 'linear-gradient(90deg, rgba(11,191,255,1) 0%, rgba(126,79,255,1) 50%, rgba(198,61,212,1) 100%)',
 	};
-
+	const buttonStyles = {
+		display: 'flex',
+		alignItems: 'center',
+	};
 	return (
 		<Nav>
 			<Link to='/'>
@@ -76,8 +80,21 @@ const Navbar = () => {
 					<Link to='/favs'>
 					<StyledHeader>Favorite Gifs</StyledHeader>
 					</Link>
-					<StyledHeader>Random</StyledHeader>
+				<Button
+					type='button'
+					bgColor='#7e4fff'
+					color='#ffff'
+					size='x-large'
+					color='white'
+					onClick={() => {
+						getRandom();
+					}}
+				>
+					Random Gif
+				</Button>
 				</NavMenu>
+			{/* <div style={buttonStyles}>
+			</div> */}
 		</Nav>
 	);
 };
