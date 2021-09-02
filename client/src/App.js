@@ -157,11 +157,11 @@ const App = () => {
 							</Modal>
 						</Route>
 						<Route exact path="/favs">
-					<Favs favGif={favGif} 
-					setCurrentGif={setCurrentGif} 
-					setModalDisplay={setModalDisplay}
-					removeFavGif={removeFavGif} favColor={favColor}
-					/>
+							<Favs favGif={favGif} 
+							setCurrentGif={setCurrentGif} 
+							setModalDisplay={setModalDisplay}
+							removeFavGif={removeFavGif} favColor={favColor}
+							/>
 							<FavModal
 								shown={modalDisplay}
 								img={currentGif?.image}

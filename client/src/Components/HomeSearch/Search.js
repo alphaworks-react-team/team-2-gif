@@ -29,9 +29,8 @@ const Search = (props) => {
             padding:"10px",
 			backgroundColor: "lightgray",
 			border: "none",
-			borderRadius: "5px",
             outline: "none",
-            width: "50%",
+            width: "70%",
             alignSelf:"center"
         },
         button: {
