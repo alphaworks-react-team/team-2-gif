@@ -27,7 +27,7 @@ const Search = props => {
         },
         input: {
             padding:"10px",
-			backgroundColor: "lightgray",
+			backgroundColor: "white",
 			border: "none",
             outline: "none",
             width: "70%",
