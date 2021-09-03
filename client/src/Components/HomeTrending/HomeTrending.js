@@ -25,7 +25,7 @@ const HomeTrending = ({ trending }) => {
 	const scroll = scrollOffset => {
 		ref.current.scrollLeft += scrollOffset;
 	};
-	console.log(ref);
+
 	return (
 		<div styles={styles}>
 			<Link to='/trending'>

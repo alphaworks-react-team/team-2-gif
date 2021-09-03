@@ -49,8 +49,8 @@ const HomeCategories = ({categories, clickedSearch}) => {
             <h1 style={{color: "white", margin: '10px'}}>Categories</h1>
         <StyledGrid>
             {categories.map((category, index) => (
-                <div style={{overflow: 'hidden', width: '100%', marginBottom: '10px'}}>
-                <StyledCategory key={index} onClick={() => searchCategory(index)} >
+                <div key={index} style={{overflow: 'hidden', width: '100%', marginBottom: '10px'}}>
+                <StyledCategory onClick={() => searchCategory(index)} >
                     <StyledHeader>{category.name.toUpperCase()}</StyledHeader>
                     <StyledImg src={category.gif.images.fixed_width.url} alt=""/>
                 </StyledCategory>
