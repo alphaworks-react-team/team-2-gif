@@ -9,6 +9,7 @@ const Nav = styled.div`
 	background-color: #121212;
 	display: flex;
 	padding: 15px;
+	justify-content: center;
 `;
 
 const Logo = styled.div`
@@ -28,23 +29,19 @@ const NavMenu = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-around;
+	/* justify-content: ; */
+	padding-left: 10px;
 	height: 100%;
 	width: 100%;
-`;
-const NavLink = styled.div`
-	display: flex;
-	padding: 10px;
-	color: #ffff;
 `;
 
 const StyledHeader = styled.h2`
 	display: flex;
-	padding: 10px;
+	padding: 10px 10px 0px 10px;
 	font-weight: 600;
-	text-decoration-color: linear-gradient(90deg, rgba(11,191,255,1) 0%, rgba(126,79,255,1) 50%, rgba(198,61,212,1) 100%);
+	margin-bottom: 0px;
+	margin-top: 0px;
 	color: white;
-
 	@keyframes backgroundIMG {
 		0% { background-image: none}
 		25% { background-image: linear-gradient(90deg, rgba(11,191,255,0.2) 0%, rgba(126,79,255,0.2) 50%, rgba(198,61,212,0.2) 100%)}
@@ -54,16 +51,30 @@ const StyledHeader = styled.h2`
 };
 	:hover {
 		animation-name: backgroundIMG;
-		animation-duration: 0.1s;
+		animation-duration: 0.2s;
 		animation-fill-mode: forwards;
+	};
+`
+const LittleDiv = styled.div`
+	width: 100%;
+	height: 5px;
+	background: linear-gradient(90deg, rgba(11,191,255,0.8) 0%, rgba(126,79,255,0.8) 50%, rgba(198,61,212,0.8) 100%);
+	margin-bottom: 10px;
+`
+
+const ColorDiv = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 0px;
+	margin-left: 7px;
+	:hover {
+		cursor: pointer;
 	};
 `
 
 const Navbar = ({ getRandom, setRandModalDisplay }) => {
-	const linkStyles = {
-		fontWeight: '600',
-		textDecorationColor: 'linear-gradient(90deg, rgba(11,191,255,1) 0%, rgba(126,79,255,1) 50%, rgba(198,61,212,1) 100%)',
-	};
 
 	const handleRandom = () => {
 		getRandom()
@@ -76,24 +87,33 @@ const Navbar = ({ getRandom, setRandModalDisplay }) => {
 				<Logo />
 			</Link>
 				<NavMenu >
-					<Link to='/trending' style={linkStyles} >
+					<ColorDiv>
+					<Link to='/trending' style={{textDecoration: 'none', paddingBottom: '0px', marginBottom: '0px'}} >
 						<StyledHeader>Trending</StyledHeader>
 					</Link>
-					<Link to='/favs'>
-					<StyledHeader>Favorite Gifs</StyledHeader>
+						<LittleDiv></LittleDiv>
+					</ColorDiv>
+					<ColorDiv>
+					<Link to='/favs' style={{textDecoration: 'none', paddingBottom: '0px', marginBottom: '0px'}} >
+						<StyledHeader>Favorite Gifs</StyledHeader>
 					</Link>
-				<Button
-					type='button'
-					bgColor='#7e4fff'
-					color='#ffff'
-					size='x-large'
-					color='white'
-					onClick={() => {
-						handleRandom();
-					}}
-				>
-					Random Gif
-				</Button>
+						<LittleDiv></LittleDiv>
+					</ColorDiv>
+					<ColorDiv>
+						<StyledHeader
+							type='button'
+							bgColor='#7e4fff'
+							color='#ffff'
+							size='x-large'
+							color='white'
+							onClick={() => {
+								handleRandom();
+							}}
+							>
+							Random Gif
+						</StyledHeader>
+						<LittleDiv></LittleDiv>
+					</ColorDiv>
 				</NavMenu>
 		</Nav>
 	);
