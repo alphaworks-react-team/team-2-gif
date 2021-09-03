@@ -53,7 +53,7 @@ const App = () => {
 
   // this use effect for pagination
   useEffect(() => {
-    if (offset >= 0) {
+    if (offset >= 0 && searchTerm !== "") {
       axios
         .get(`/search/${searchTerm}/${offset}`)
         .then((res) => {
@@ -101,15 +101,17 @@ const App = () => {
   };
 
   const onSearchSubmit = (searchTerm) => {
-    setSearchTerm(searchTerm);
-    setOffset(0);
-    setPage(1);
-    axios
-      .get(`/search/${searchTerm}/${offset}`)
-      .then((res) => {
-        setSearchedContent(res.data);
-      })
-      .catch((err) => console.log(err));
+    if (searchTerm !== "") {
+      setSearchTerm(searchTerm);
+      setOffset(0);
+      setPage(1);
+      axios
+        .get(`/search/${searchTerm}/${offset}`)
+        .then((res) => {
+          setSearchedContent(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const getRandom = () => {
