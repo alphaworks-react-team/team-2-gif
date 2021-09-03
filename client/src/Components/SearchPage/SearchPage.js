@@ -28,6 +28,7 @@ const iconStyles = {
   transform: "translateY(-45px)",
   display: "flex",
 };
+
 const SearchPage = ({
   searchedContent,
   setModalDisplay,

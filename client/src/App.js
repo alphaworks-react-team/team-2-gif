@@ -221,7 +221,7 @@ const App = () => {
                 </h3>
               </FavModal>
             </Route>
-            <Route path="/search/">
+            <Route path="/search">
               <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
                 {searchTerm}
               </h1>

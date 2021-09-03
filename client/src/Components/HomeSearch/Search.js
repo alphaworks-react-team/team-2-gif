@@ -42,7 +42,7 @@ const Search = (props) => {
     if (!searchTerm) {
       alert("please type a search term");
     } else {
-      history.push(`/search`);
+      history.push("/search");
     }
   };
 
