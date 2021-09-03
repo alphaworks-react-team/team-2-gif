@@ -41,13 +41,11 @@ const App = () => {
 
 	useEffect(() => {
 		axios.get('/api').then(res => {
-			console.log(res);
 			setTrending(res.data);
 		});
 		axios
 			.get('/categories')
 			.then(res => {
-				console.log(res);
 				setCategories(res.data);
 			})
 			.catch(err => console.log(err));
@@ -59,7 +57,6 @@ const App = () => {
 			axios
 				.get(`/search/${searchTerm}/${offset}`)
 				.then(res => {
-					console.log(res);
 					setSearchedGifs(res.data);
 				})
 				.catch(err => console.log(err));
@@ -110,7 +107,6 @@ const App = () => {
 		axios
 			.get(`/search/${searchTerm}/${offset}`)
 			.then(res => {
-				console.log(res);
 				setSearchedGifs(res.data);
 			})
 			.catch(err => console.log(err));
@@ -146,7 +142,6 @@ const App = () => {
 							img={randomGif}
 							title={'Gif'}
 							clickProp={() => {
-								console.log(randomGif);
 								navigator.clipboard.writeText(randomGif);
 							}}
 						>
