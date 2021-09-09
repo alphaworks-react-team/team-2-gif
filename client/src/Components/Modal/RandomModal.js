@@ -67,7 +67,7 @@ const RandomModal = (props) => {
     <ModalStyle style={styleModal} onClick={props.onClick}>
       <ModalContent>
         <ModalHeader>
-          <ModalTitle>{props.title}</ModalTitle>
+          <ModalTitle>Your Random Gif</ModalTitle>
         </ModalHeader>
         <ModalBody>
           {copied ? (

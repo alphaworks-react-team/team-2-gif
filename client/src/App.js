@@ -145,7 +145,6 @@ const App = () => {
               randomGif={randomGif}
               shown={randModalDisplay}
               img={randomGif}
-              title={"Gif"}
               clickProp={() => {
                 navigator.clipboard.writeText(randomGif);
               }}
@@ -177,20 +176,8 @@ const App = () => {
                       currentGif.images.original.url
                     )
                   }
-                >
-                  <h3
-                    style={{
-                      padding: "0",
-                      backgroundColor: "black",
-                      color: "white",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => modalCloseHelper()}
-                  >
-                    Close
-                  </h3>
-                </Modal>
+                  close={() => modalCloseHelper()}
+                ></Modal>
               )}
             </Route>
             <Route exact path="/favs">
@@ -251,20 +238,8 @@ const App = () => {
                       currentGif.images.original.url
                     )
                   }
-                >
-                  <h3
-                    style={{
-                      padding: "0",
-                      backgroundColor: "black",
-                      color: "white",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => modalCloseHelper()}
-                  >
-                    Close
-                  </h3>
-                </Modal>
+                  close={() => modalCloseHelper()}
+                ></Modal>
               )}
             </Route>
           </Switch>
