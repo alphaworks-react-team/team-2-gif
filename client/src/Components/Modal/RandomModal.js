@@ -44,6 +44,14 @@ const ModalImg = styled.img`
   height: 100%;
 `;
 
+const CloseBtn = styled.h3`
+  padding: 0;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+`;
+
 const RandomModal = (props) => {
   const [copied, setCopied] = useState(false);
 
@@ -80,18 +88,7 @@ const RandomModal = (props) => {
           )}
         </ModalBody>
         <ModalFooter>
-          <h3
-            style={{
-              padding: "0",
-              backgroundColor: "black",
-              color: "white",
-              border: "none",
-              cursor: "pointer",
-            }}
-            onClick={handleClose}
-          >
-            Close
-          </h3>
+          <CloseBtn onClick={handleClose}>Close</CloseBtn>
           <CopyButton onClick={handleCopy} />
         </ModalFooter>
       </ModalContent>

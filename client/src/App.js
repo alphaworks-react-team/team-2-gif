@@ -195,20 +195,8 @@ const App = () => {
                 clickProp={() =>
                   navigator.clipboard.writeText(currentGif.image)
                 }
-              >
-                <h3
-                  style={{
-                    padding: "0",
-                    backgroundColor: "black",
-                    color: "white",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => modalCloseHelper()}
-                >
-                  Close
-                </h3>
-              </FavModal>
+                close={() => modalCloseHelper()}
+              ></FavModal>
             </Route>
             <Route path="/search">
               <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>

@@ -43,6 +43,14 @@ const ModalImg = styled.img`
   height: 100%;
 `;
 
+const CloseBtn = styled.h3`
+  padding: 0;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+`;
+
 const FavModal = (props) => {
   const [copied, setCopied] = useState(false);
 
@@ -75,7 +83,7 @@ const FavModal = (props) => {
           )}
         </ModalBody>
         <ModalFooter>
-          {props.children}
+          <CloseBtn onClick={props.close}>Close</CloseBtn>
           <CopyButton onClick={handleCopy} />
         </ModalFooter>
       </ModalContent>
