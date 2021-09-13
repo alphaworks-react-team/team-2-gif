@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "./styles";
 import { useHistory } from "react-router";
-import axios from "axios";
-//height:100%;
-//width:10vh
+
 const Search = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const history = useHistory();

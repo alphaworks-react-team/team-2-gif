@@ -4,8 +4,6 @@ import Paginator from "../Paginator/Paginator";
 import Modal from "../Modal/Modal";
 import { AiFillHeart } from "react-icons/ai";
 import axios from "axios";
-//height:80vh
-//width:100%
 
 const StyledSearch = styled.div`
   position: relative;
@@ -63,6 +61,9 @@ const SearchPage = ({ searchTerm, addFavGif, favColor }) => {
 
   return (
     <div>
+      <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
+        {searchTerm}
+      </h1>
       <StyledGrid>
         {searchedContent &&
           searchedContent.map((searchRes, index) => (
@@ -76,7 +77,6 @@ const SearchPage = ({ searchTerm, addFavGif, favColor }) => {
                   setModalDisplay(true);
                 }}
               />
-
               <AiFillHeart
                 onClick={() =>
                   addFavGif(searchRes.images.fixed_width.url, searchRes.id)

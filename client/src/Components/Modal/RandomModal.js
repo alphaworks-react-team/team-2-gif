@@ -56,7 +56,7 @@ const RandomModal = (props) => {
   const [copied, setCopied] = useState(false);
 
   const modalShow = {
-    visibility: props.shown === true ? "visible" : "hidden",
+    visibility: props.randModalDisplay === true ? "visible" : "hidden",
   };
 
   const handleCopy = () => {
@@ -76,11 +76,11 @@ const RandomModal = (props) => {
         <ModalBody>
           {copied ? (
             <ModalBody>
-              <ModalImg src={props.img} />
+              <ModalImg src={props.randomGif} />
               <h1 style={{ position: "absolute", color: "green" }}>Copied</h1>
             </ModalBody>
           ) : (
-            <img src={props.img} alt="broken" />
+            <img src={props.randomGif} alt="broken" />
           )}
         </ModalBody>
         <ModalFooter>

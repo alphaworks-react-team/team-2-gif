@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// Components
 import axios from "axios";
 import Search from "./Components/HomeSearch/Search";
 import HomeCategories from "./Components/HomeCategories/HomeCategories";
 import Main from "./Components/Main";
-import "./App.css";
 import HomeTrending from "./Components/HomeTrending/HomeTrending";
 import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
-import Modal from "./Components/Modal/Modal";
 import RandomModal from "./Components/Modal/RandomModal";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Favs from "./Components/Favs/Favs";
 import Footer from "./Components/Footer/Footer";
 import Navbar from "./Components/Navigation/Navbar";
+import "./App.css";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -101,18 +101,17 @@ const App = () => {
           <RandomModal
             randomCloseHelper={randomCloseHelper}
             randomGif={randomGif}
-            shown={randModalDisplay}
-            img={randomGif}
+            randModalDisplay={randModalDisplay}
           ></RandomModal>
           <Switch>
             <Route exact path="/">
               <HomeTrending />
               <HomeCategories onSearchSubmit={onSearchSubmit} />
             </Route>
-            <Route exact path="/trending">
+            <Route path="/trending">
               <TrendingPage addFavGif={addFavGif} favColor={favColor} />
             </Route>
-            <Route exact path="/favs">
+            <Route path="/favs">
               <Favs
                 favGif={favGif}
                 removeFavGif={removeFavGif}
@@ -120,9 +119,6 @@ const App = () => {
               />
             </Route>
             <Route path="/search">
-              <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
-                {searchTerm}
-              </h1>
               <SearchPage
                 addFavGif={addFavGif}
                 favColor={favColor}
