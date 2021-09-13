@@ -17,8 +17,6 @@ import "./App.css";
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchedContent, setSearchedContent] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const [page, setPage] = useState(1);
   const [randModalDisplay, setRandModalDisplay] = useState(false);
   const [favGif, setFavGif] = useState([]);
   const [randomGif, setRandomGif] = useState("");
@@ -67,10 +65,8 @@ const App = () => {
   const onSearchSubmit = (searchTerm) => {
     if (searchTerm !== "") {
       setSearchTerm(searchTerm);
-      setOffset(0);
-      setPage(1);
       axios
-        .get(`/search/${searchTerm}/${offset}`)
+        .get(`/search/${searchTerm}/${0}`)
         .then((res) => {
           setSearchedContent(res.data);
         })
@@ -97,7 +93,7 @@ const App = () => {
             setRandModalDisplay={setRandModalDisplay}
             getRandom={getRandom}
           />
-          <Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
+          <Search onSearchSubmit={onSearchSubmit} />
           <RandomModal
             randomCloseHelper={randomCloseHelper}
             randomGif={randomGif}

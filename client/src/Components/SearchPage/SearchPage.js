@@ -37,7 +37,7 @@ const SearchPage = ({ searchTerm, addFavGif, favColor }) => {
   const [modalDisplay, setModalDisplay] = useState(false);
 
   useEffect(() => {
-    if (offset >= 0 && searchTerm !== "") {
+    if (offset >= 0) {
       axios
         .get(`/search/${searchTerm}/${offset}`)
         .then((res) => {
@@ -45,7 +45,18 @@ const SearchPage = ({ searchTerm, addFavGif, favColor }) => {
         })
         .catch((err) => console.log(err));
     }
-  }, [offset, searchTerm]);
+  }, [offset]);
+
+  useEffect(() => {
+    setOffset(0);
+    setPage(1);
+    axios
+      .get(`/search/${searchTerm}/0`)
+      .then((res) => {
+        setSearchedContent(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [searchTerm]);
 
   const incrementOffset = () => {
     setOffset((offset) => offset + 50);

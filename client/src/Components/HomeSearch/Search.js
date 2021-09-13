@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "./styles";
 import { useHistory } from "react-router";
+import axios from "axios";
 
 const Search = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +16,15 @@ const Search = (props) => {
     props.onSearchSubmit(searchTerm);
     setSearchTerm("");
   };
+
+  const searchCheck = () => {
+    if (!searchTerm) {
+      alert("please type a search term");
+    } else {
+      history.push("/search");
+    }
+  };
+
   const styles = {
     height: "10vh",
     width: "100%",
@@ -35,14 +45,6 @@ const Search = (props) => {
       marginLeft: "10px",
       bgColor: "#6E65FF",
     },
-  };
-
-  const searchCheck = () => {
-    if (!searchTerm) {
-      alert("please type a search term");
-    } else {
-      history.push("/search");
-    }
   };
 
   return (
