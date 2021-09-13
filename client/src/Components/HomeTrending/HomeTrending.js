@@ -1,10 +1,22 @@
-import React, { useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Button } from "../HomeSearch/styles";
 import { Link } from "react-router-dom";
+import axios from "axios";
 //height:30vh
 //width:100%
-const HomeTrending = ({ trending }) => {
+const HomeTrending = () => {
+  const [trending, setTrending] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/trending")
+      .then((res) => {
+        setTrending(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const ref = useRef(null);
   const styles = {
     height: "30vh",
@@ -33,7 +45,6 @@ const HomeTrending = ({ trending }) => {
       </Link>
       <div style={styles.trend}>
         <Button
-          // disabled={ref}
           bgColor="#121212"
           color="#ffff"
           size="xx-large"
@@ -52,7 +63,6 @@ const HomeTrending = ({ trending }) => {
           ))}
         </Scroll>
         <Button
-          // disabled{!ref}
           bgColor="#121212"
           color="#ffff"
           size="xx-large"
@@ -70,9 +80,6 @@ const Scroll = styled.div`
     display: none;
   }
   scroll-behavior: smooth;
-  /* scroll-margin-:left() */
-  /* margin-left: 0px;
-    margin-right: 150px; */
 `;
 
 export default HomeTrending;

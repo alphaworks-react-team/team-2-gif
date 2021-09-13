@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Paginator from "../Paginator/Paginator";
+import Modal from "../Modal/Modal";
 import { AiFillHeart } from "react-icons/ai";
-
+import axios from "axios";
 //height:80vh
 //width:100%
 
@@ -29,13 +31,36 @@ const iconStyles = {
   display: "flex",
 };
 
-const SearchPage = ({
-  searchedContent,
-  setModalDisplay,
-  setCurrentGif,
-  addFavGif,
-  favColor,
-}) => {
+const SearchPage = ({ searchTerm, addFavGif, favColor }) => {
+  const [searchedContent, setSearchedContent] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [page, setPage] = useState(1);
+  const [currentGif, setCurrentGif] = useState({});
+  const [modalDisplay, setModalDisplay] = useState(false);
+
+  useEffect(() => {
+    if (offset >= 0 && searchTerm !== "") {
+      axios
+        .get(`/search/${searchTerm}/${offset}`)
+        .then((res) => {
+          setSearchedContent(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [offset, searchTerm]);
+
+  const incrementOffset = () => {
+    setOffset((offset) => offset + 50);
+  };
+  const decrementOffset = () => {
+    setOffset((offset) => offset - 50);
+  };
+
+  const modalCloseHelper = async () => {
+    setCurrentGif({});
+    setModalDisplay(false);
+  };
+
   return (
     <div>
       <StyledGrid>
@@ -63,6 +88,21 @@ const SearchPage = ({
             </StyledSearch>
           ))}
       </StyledGrid>
+      <Paginator
+        offset={offset}
+        page={page}
+        setPage={setPage}
+        incrementOffset={incrementOffset}
+        decrementOffset={decrementOffset}
+      ></Paginator>
+      {currentGif.type && (
+        <Modal
+          shown={modalDisplay}
+          img={currentGif.images?.original.url}
+          title={currentGif.title}
+          close={() => modalCloseHelper()}
+        ></Modal>
+      )}
     </div>
   );
 };

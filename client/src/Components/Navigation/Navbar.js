@@ -111,7 +111,9 @@ const ColorDiv = styled.div`
 const Navbar = ({ getRandom, setRandModalDisplay }) => {
   const handleRandom = () => {
     getRandom();
-    setRandModalDisplay(true);
+    setTimeout(() => {
+      setRandModalDisplay(true);
+    }, 300);
   };
 
   return (

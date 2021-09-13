@@ -8,27 +8,22 @@ import HomeTrending from "./Components/HomeTrending/HomeTrending";
 import TrendingPage from "./Components/TrendingPage/TrendingPage";
 import SearchPage from "./Components/SearchPage/SearchPage";
 import Modal from "./Components/Modal/Modal";
-import FavModal from "./Components/Modal/FavModal";
 import RandomModal from "./Components/Modal/RandomModal";
-import Paginator from "./Components/Paginator/Paginator";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Favs from "./Components/Favs/Favs";
 import Footer from "./Components/Footer/Footer";
 import Navbar from "./Components/Navigation/Navbar";
 
 const App = () => {
-  const [trending, setTrending] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchedContent, setSearchedContent] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(1);
-  const [modalDisplay, setModalDisplay] = useState(false);
   const [randModalDisplay, setRandModalDisplay] = useState(false);
-  const [currentGif, setCurrentGif] = useState({});
   const [favGif, setFavGif] = useState([]);
   const [randomGif, setRandomGif] = useState("");
 
+  // used for favorites in local storage
   useEffect(() => {
     const favs = localStorage.getItem("favs");
     if (favs == null) {
@@ -38,37 +33,6 @@ const App = () => {
       setFavGif(JSON.parse(favs));
     }
   }, []);
-
-  useEffect(() => {
-    axios.get("/api").then((res) => {
-      setTrending(res.data);
-    });
-    axios
-      .get("/categories")
-      .then((res) => {
-        setCategories(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  // this use effect for pagination
-  useEffect(() => {
-    if (offset >= 0 && searchTerm !== "") {
-      axios
-        .get(`/search/${searchTerm}/${offset}`)
-        .then((res) => {
-          setSearchedContent(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [offset, searchTerm]);
-
-  const incrementOffset = () => {
-    setOffset((offset) => offset + 50);
-  };
-  const decrementOffset = () => {
-    setOffset((offset) => offset - 50);
-  };
 
   const favColor = (id) => {
     const favsCopy = [...favGif];
@@ -125,11 +89,6 @@ const App = () => {
     setRandModalDisplay(false);
   };
 
-  const modalCloseHelper = async () => {
-    setCurrentGif({});
-    setModalDisplay(false);
-  };
-
   return (
     <div className="App">
       <Router>
@@ -139,96 +98,36 @@ const App = () => {
             getRandom={getRandom}
           />
           <Search onSearchSubmit={onSearchSubmit} offset={offset} page={page} />
-          {randomGif !== "" && (
-            <RandomModal
-              randomCloseHelper={randomCloseHelper}
-              randomGif={randomGif}
-              shown={randModalDisplay}
-              img={randomGif}
-              clickProp={() => {
-                navigator.clipboard.writeText(randomGif);
-              }}
-            ></RandomModal>
-          )}
+          <RandomModal
+            randomCloseHelper={randomCloseHelper}
+            randomGif={randomGif}
+            shown={randModalDisplay}
+            img={randomGif}
+          ></RandomModal>
           <Switch>
             <Route exact path="/">
-              <HomeTrending trending={trending} />
-              <HomeCategories
-                categories={categories}
-                clickedSearch={onSearchSubmit}
-              />
+              <HomeTrending />
+              <HomeCategories onSearchSubmit={onSearchSubmit} />
             </Route>
             <Route exact path="/trending">
-              <TrendingPage
-                setModalDisplay={setModalDisplay}
-                setCurrentGif={setCurrentGif}
-                trending={trending}
-                addFavGif={addFavGif}
-                favColor={favColor}
-              />
-              {currentGif.type && (
-                <Modal
-                  shown={modalDisplay}
-                  img={currentGif.images?.original.url}
-                  title={currentGif.title}
-                  clickProp={() =>
-                    navigator.clipboard.writeText(
-                      currentGif.images.original.url
-                    )
-                  }
-                  close={() => modalCloseHelper()}
-                ></Modal>
-              )}
+              <TrendingPage addFavGif={addFavGif} favColor={favColor} />
             </Route>
             <Route exact path="/favs">
               <Favs
                 favGif={favGif}
-                setCurrentGif={setCurrentGif}
-                setModalDisplay={setModalDisplay}
                 removeFavGif={removeFavGif}
                 favColor={favColor}
               />
-              <FavModal
-                shown={modalDisplay}
-                img={currentGif?.image}
-                removeFavGif={removeFavGif}
-                clickProp={() =>
-                  navigator.clipboard.writeText(currentGif.image)
-                }
-                close={() => modalCloseHelper()}
-              ></FavModal>
             </Route>
             <Route path="/search">
               <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
                 {searchTerm}
               </h1>
               <SearchPage
-                searchedContent={searchedContent}
-                setModalDisplay={setModalDisplay}
-                setCurrentGif={setCurrentGif}
                 addFavGif={addFavGif}
                 favColor={favColor}
+                searchTerm={searchTerm}
               />
-              <Paginator
-                offset={offset}
-                page={page}
-                setPage={setPage}
-                incrementOffset={incrementOffset}
-                decrementOffset={decrementOffset}
-              />
-              {currentGif.type && (
-                <Modal
-                  shown={modalDisplay}
-                  img={currentGif.images?.original.url}
-                  title={currentGif.title}
-                  clickProp={() =>
-                    navigator.clipboard.writeText(
-                      currentGif.images.original.url
-                    )
-                  }
-                  close={() => modalCloseHelper()}
-                ></Modal>
-              )}
             </Route>
           </Switch>
           <Footer />

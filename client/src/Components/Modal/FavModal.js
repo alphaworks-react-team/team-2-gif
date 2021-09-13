@@ -59,7 +59,7 @@ const FavModal = (props) => {
   };
 
   const handleCopy = () => {
-    props.clickProp();
+    navigator.clipboard.writeText(props.img);
     setCopied(true);
     setTimeout(() => {
       setCopied(false);

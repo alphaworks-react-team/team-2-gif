@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { AiFillHeart } from "react-icons/ai";
+import FavModal from "../Modal/FavModal";
 
 const FavStyles = styled.div`
   position: relative;
@@ -30,13 +31,15 @@ const Title = styled.h2`
   color: #ffff;
 `;
 
-const Favs = ({
-  favGif,
-  setModalDisplay,
-  setCurrentGif,
-  removeFavGif,
-  favColor,
-}) => {
+const Favs = ({ favGif, removeFavGif, favColor }) => {
+  const [currentGif, setCurrentGif] = useState({});
+  const [modalDisplay, setModalDisplay] = useState(false);
+
+  const modalCloseHelper = async () => {
+    setCurrentGif({});
+    setModalDisplay(false);
+  };
+
   const styles = {
     minHeight: "700px",
     display: "flex",
@@ -54,7 +57,6 @@ const Favs = ({
   return (
     <div style={{ minHeight: "700px" }}>
       <Title>Favorites</Title>
-
       <StyledGrid>
         {favGif.map((favs, index) => (
           <FavStyles key={index} style={styles.img}>
@@ -76,6 +78,12 @@ const Favs = ({
           </FavStyles>
         ))}
       </StyledGrid>
+      <FavModal
+        shown={modalDisplay}
+        img={currentGif?.image}
+        removeFavGif={removeFavGif}
+        close={() => modalCloseHelper()}
+      ></FavModal>
     </div>
   );
 };

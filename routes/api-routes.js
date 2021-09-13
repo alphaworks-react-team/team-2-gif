@@ -54,7 +54,7 @@ const fetchCategories = () => {
   });
 };
 
-router.get("/api", async (req, res) => {
+router.get("/trending", async (req, res) => {
   try {
     res.json(await fetchTrending());
   } catch (err) {

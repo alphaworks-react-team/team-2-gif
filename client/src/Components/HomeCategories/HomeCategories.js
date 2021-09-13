@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import axios from "axios";
 
 const StyledCategory = styled.div`
   position: relative;
@@ -41,11 +42,21 @@ const StyledImg = styled.img`
   border-radius: 10px;
 `;
 
-const HomeCategories = ({ categories, clickedSearch }) => {
+const HomeCategories = ({ onSearchSubmit }) => {
+  const [categories, setCategories] = useState([]);
   const history = useHistory();
 
+  useEffect(() => {
+    axios
+      .get("/categories")
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const searchCategory = (index) => {
-    clickedSearch(categories[index].name);
+    onSearchSubmit(categories[index].name);
     history.push(`/search`);
   };
 

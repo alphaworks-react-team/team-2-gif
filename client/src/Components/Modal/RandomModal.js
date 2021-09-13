@@ -55,24 +55,20 @@ const CloseBtn = styled.h3`
 const RandomModal = (props) => {
   const [copied, setCopied] = useState(false);
 
-  const styleModal = {
+  const modalShow = {
     visibility: props.shown === true ? "visible" : "hidden",
   };
 
   const handleCopy = () => {
-    props.clickProp();
+    navigator.clipboard.writeText(props.randomGif);
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
     }, 7000);
   };
 
-  const handleClose = () => {
-    props.randomCloseHelper();
-  };
-
   return (
-    <ModalStyle style={styleModal} onClick={props.onClick}>
+    <ModalStyle style={modalShow} onClick={props.onClick}>
       <ModalContent>
         <ModalHeader>
           <ModalTitle>Your Random Gif</ModalTitle>
@@ -88,7 +84,7 @@ const RandomModal = (props) => {
           )}
         </ModalBody>
         <ModalFooter>
-          <CloseBtn onClick={handleClose}>Close</CloseBtn>
+          <CloseBtn onClick={props.randomCloseHelper}>Close</CloseBtn>
           <CopyButton onClick={handleCopy} />
         </ModalFooter>
       </ModalContent>
