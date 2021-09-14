@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { AiFillHeart } from "react-icons/ai";
 import FavModal from "../Modal/FavModal";
+import { FavContext } from "../../Contexts/FavContext";
 
 const FavStyles = styled.div`
   position: relative;
@@ -31,9 +32,11 @@ const Title = styled.h2`
   color: #ffff;
 `;
 
-const Favs = ({ favGif, removeFavGif, favColor }) => {
+const Favs = () => {
   const [currentGif, setCurrentGif] = useState({});
   const [modalDisplay, setModalDisplay] = useState(false);
+  // using the context state and its functions
+  const { favGif, removeFavGif, favColor } = useContext(FavContext);
 
   const modalCloseHelper = async () => {
     setCurrentGif({});
@@ -81,7 +84,6 @@ const Favs = ({ favGif, removeFavGif, favColor }) => {
       <FavModal
         shown={modalDisplay}
         img={currentGif?.image}
-        removeFavGif={removeFavGif}
         close={() => modalCloseHelper()}
       ></FavModal>
     </div>

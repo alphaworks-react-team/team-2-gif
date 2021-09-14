@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import Paginator from "../Paginator/Paginator";
 import Modal from "../Modal/Modal";
 import { AiFillHeart } from "react-icons/ai";
 import axios from "axios";
+import { FavContext } from "../../Contexts/FavContext";
 
 const StyledSearch = styled.div`
   position: relative;
@@ -29,12 +30,14 @@ const iconStyles = {
   display: "flex",
 };
 
-const SearchPage = ({ searchTerm, addFavGif, favColor }) => {
+const SearchPage = ({ searchTerm }) => {
   const [searchedContent, setSearchedContent] = useState([]);
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(1);
   const [currentGif, setCurrentGif] = useState({});
   const [modalDisplay, setModalDisplay] = useState(false);
+
+  const { addFavGif, favColor } = useContext(FavContext);
 
   useEffect(() => {
     if (offset >= 0) {

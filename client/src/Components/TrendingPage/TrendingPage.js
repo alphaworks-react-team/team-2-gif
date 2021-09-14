@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { AiFillHeart } from "react-icons/ai";
 import Modal from "../Modal/Modal";
 import axios from "axios";
+import { FavContext } from "../../Contexts/FavContext";
 
 const TrendingStyles = styled.div`
   position: relative;
@@ -32,10 +33,11 @@ const Title = styled.h2`
   color: #ffff;
 `;
 
-const TrendingPage = ({ addFavGif, favColor }) => {
+const TrendingPage = () => {
   const [currentGif, setCurrentGif] = useState({});
   const [modalDisplay, setModalDisplay] = useState(false);
   const [trending, setTrending] = useState([]);
+  const { favColor, addFavGif } = useContext(FavContext);
 
   useEffect(() => {
     axios
