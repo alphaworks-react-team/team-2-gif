@@ -44,54 +44,47 @@ const ModalImg = styled.img`
   height: 100%;
 `;
 
+const CloseBtn = styled.h3`
+  padding: 0;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+`;
+
 const RandomModal = (props) => {
   const [copied, setCopied] = useState(false);
 
-  const styleModal = {
-    visibility: props.shown === true ? "visible" : "hidden",
+  const modalShow = {
+    visibility: props.randModalDisplay === true ? "visible" : "hidden",
   };
 
   const handleCopy = () => {
-    props.clickProp();
+    navigator.clipboard.writeText(props.randomGif);
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
     }, 7000);
   };
 
-  const handleClose = () => {
-    props.randomCloseHelper();
-  };
-
   return (
-    <ModalStyle style={styleModal} onClick={props.onClick}>
+    <ModalStyle style={modalShow} onClick={props.onClick}>
       <ModalContent>
         <ModalHeader>
-          <ModalTitle>{props.title}</ModalTitle>
+          <ModalTitle>Your Random Gif</ModalTitle>
         </ModalHeader>
         <ModalBody>
           {copied ? (
             <ModalBody>
-              <ModalImg src={props.img} />
+              <ModalImg src={props.randomGif} />
               <h1 style={{ position: "absolute", color: "green" }}>Copied</h1>
             </ModalBody>
           ) : (
-            <img src={props.img} alt="broken" />
+            <img src={props.randomGif} alt="broken" />
           )}
         </ModalBody>
         <ModalFooter>
-          <h3
-            style={{
-              padding: "0",
-              backgroundColor: "black",
-              color: "white",
-              border: "none",
-              cursor: "pointer",
-            }}
-            onClick={handleClose}
-          >
-            Close
-          </h3>
+          <CloseBtn onClick={props.randomCloseHelper}>Close</CloseBtn>
           <CopyButton onClick={handleCopy} />
         </ModalFooter>
       </ModalContent>

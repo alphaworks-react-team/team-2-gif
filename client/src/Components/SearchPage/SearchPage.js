@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import Paginator from "../Paginator/Paginator";
+import Modal from "../Modal/Modal";
 import { AiFillHeart } from "react-icons/ai";
-
-//height:80vh
-//width:100%
+import axios from "axios";
+import { FavContext } from "../../Contexts/FavContext";
 
 const StyledSearch = styled.div`
   position: relative;
@@ -29,15 +30,54 @@ const iconStyles = {
   display: "flex",
 };
 
-const SearchPage = ({
-  searchedContent,
-  setModalDisplay,
-  setCurrentGif,
-  addFavGif,
-  favColor,
-}) => {
+const SearchPage = ({ searchTerm }) => {
+  const [searchedContent, setSearchedContent] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [page, setPage] = useState(1);
+  const [currentGif, setCurrentGif] = useState({});
+  const [modalDisplay, setModalDisplay] = useState(false);
+
+  const { addFavGif, favColor } = useContext(FavContext);
+
+  useEffect(() => {
+    if (offset >= 0) {
+      axios
+        .get(`/search/${searchTerm}/${offset}`)
+        .then((res) => {
+          setSearchedContent(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [offset]);
+
+  useEffect(() => {
+    setOffset(0);
+    setPage(1);
+    axios
+      .get(`/search/${searchTerm}/0`)
+      .then((res) => {
+        setSearchedContent(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [searchTerm]);
+
+  const incrementOffset = () => {
+    setOffset((offset) => offset + 50);
+  };
+  const decrementOffset = () => {
+    setOffset((offset) => offset - 50);
+  };
+
+  const modalCloseHelper = async () => {
+    setCurrentGif({});
+    setModalDisplay(false);
+  };
+
   return (
     <div>
+      <h1 style={{ color: "white", margin: "0px 0px 20px 35px" }}>
+        {searchTerm}
+      </h1>
       <StyledGrid>
         {searchedContent &&
           searchedContent.map((searchRes, index) => (
@@ -51,7 +91,6 @@ const SearchPage = ({
                   setModalDisplay(true);
                 }}
               />
-
               <AiFillHeart
                 onClick={() =>
                   addFavGif(searchRes.images.fixed_width.url, searchRes.id)
@@ -63,6 +102,21 @@ const SearchPage = ({
             </StyledSearch>
           ))}
       </StyledGrid>
+      <Paginator
+        offset={offset}
+        page={page}
+        setPage={setPage}
+        incrementOffset={incrementOffset}
+        decrementOffset={decrementOffset}
+      ></Paginator>
+      {currentGif.type && (
+        <Modal
+          shown={modalDisplay}
+          img={currentGif.images?.original.url}
+          title={currentGif.title}
+          close={() => modalCloseHelper()}
+        ></Modal>
+      )}
     </div>
   );
 };

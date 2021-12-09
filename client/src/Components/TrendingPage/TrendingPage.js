@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { AiFillHeart } from "react-icons/ai";
+import Modal from "../Modal/Modal";
+import axios from "axios";
+import { FavContext } from "../../Contexts/FavContext";
 
 const TrendingStyles = styled.div`
   position: relative;
@@ -30,28 +33,32 @@ const Title = styled.h2`
   color: #ffff;
 `;
 
-const iconStyles = {
-  position: "absolute",
-  transform: "translateY(-45px)",
-  display: "flex",
-  alignSelf: "flex-start",
-  paddingLeft: "87%",
-};
+const TrendingPage = () => {
+  const [currentGif, setCurrentGif] = useState({});
+  const [modalDisplay, setModalDisplay] = useState(false);
+  const [trending, setTrending] = useState([]);
+  const { favColor, addFavGif } = useContext(FavContext);
 
-const TrendingPage = ({
-  trending,
-  setModalDisplay,
-  setCurrentGif,
-  addFavGif,
-  favColor,
-}) => {
+  useEffect(() => {
+    axios
+      .get("/trending")
+      .then((res) => {
+        setTrending(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const iconStyles = {
     position: "absolute",
     transform: "translateY(-45px)",
     display: "flex",
-    // alignSelf: 'flex-end',
-    // paddingLeft: '87%',
   };
+
+  const modalCloseHelper = async () => {
+    setCurrentGif({});
+    setModalDisplay(false);
+  };
+
   return (
     <div>
       <Title>Trending</Title>
@@ -64,8 +71,8 @@ const TrendingPage = ({
                 style={{ width: "100%", borderRadius: "10px" }}
                 alt=""
                 onClick={() => {
-                  setModalDisplay(true);
                   setCurrentGif(trending);
+                  setModalDisplay(true);
                 }}
               />
               <AiFillHeart
@@ -80,6 +87,14 @@ const TrendingPage = ({
           </TrendingStyles>
         ))}
       </StyledGrid>
+      {currentGif.type && (
+        <Modal
+          shown={modalDisplay}
+          img={currentGif.images?.original.url}
+          title={currentGif.title}
+          close={() => modalCloseHelper()}
+        ></Modal>
+      )}
     </div>
   );
 };
